@@ -1,0 +1,186 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+        <item name="editTextStyle">@style/EditTextStyle</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:textColorHint">@color/BackgroundtWhiteColor</item>
+        <item name="colorControlNormal">@color/BackgroundtWhiteColor</item>
+        <item name="colorControlActivated">@color/BackgroundtWhiteColor</item>
+        <item name="colorControlHighlight">@color/BackgroundtWhiteColor</item>
+        <item name="ratingBarStyle">@style/MyRatingBar</item>
+        <item name="actionMenuTextColor">@color/color_white</item>
+    </style>
+
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@android:color/black</item>
+    </style>
+
+    <style name="RatingBar" parent="@style/Base.Widget.AppCompat.RatingBar.Indicator">
+        <item name="colorControlNormal">#3D3D00</item>
+        <item name="colorControlActivated">#CCCC00</item>
+    </style>
+
+   <!-- <style name="SplashTheam" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:background">@drawable/splash_screen</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>-->
+
+    <style name="FullScreenTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="EditTextMessage" parent="@style/Widget.Design.TextInputLayout">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@drawable/bg_dialog</item>
+        <item name="android:padding">@dimen/sp_12</item>
+
+    </style>
+
+    <style name="ButtonRoundStyle" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_round</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_bg</item>
+    </style>
+
+    <style name="ButtonStyleDisable" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_bg_disable</item>
+    </style>
+
+
+    <!--   EditText theme. -->
+    <style name="EditTextTheam" parent="@style/Widget.Design.TextInputLayout">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@drawable/edittext_round</item>
+        <item name="android:padding">@dimen/dp_12</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+    </style>
+
+    <!--   Button theme. -->
+    <style name="ButtonTheam" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/rapple_effect</item>
+        <item name="android:textSize">15sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
+    </style>
+
+
+    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+
+    <style name="EditTextStyle" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="TextViewStyle" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <style name="AppThemeRatingBar" parent="Theme.AppCompat">
+        <!--<item name="ratingBarStyle">@style/MyRatingBar</item>-->
+        <item name="colorAccent">#6200ea</item>
+        <item name="android:colorControlNormal">#f9a825</item>
+    </style>
+
+    <style name="MyRatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorAccent">@color/grey_lite</item>
+        <item name="android:colorControlNormal">@color/color_btn_bg</item>
+    </style>
+
+    <style name="RatingBarNew" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">#f9a825</item>
+    </style>
+
+    <style name="MyTimePickerDialogTheme" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="SwitchCompatStyle" >
+        <item name="android:thumb">@color/colorPrimaryDark</item>
+        <item name="trackTint">@color/color_btn_bg</item>
+    </style>
+
+
+
+    <style name="searchColor">
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <!-- your other custom widget styles -->
+    </style>
+
+
+
+    <style name="SpinnerThemeLight" >
+        <item name="android:colorBackground">@color/color_white</item>
+        <item name="android:textColorPrimary">@color/color_white</item>
+        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:textColorTertiary">@color/color_white</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/color_white</item>
+    </style>
+
+</resources>

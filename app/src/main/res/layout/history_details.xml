@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.ondemandservice.android.ui.activity.CategoryActivity">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:text="Job Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:textColor="@android:color/black"
+                android:text="Complete Job Description"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/sp_16"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvScheduleDate"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/grey"
+                android:text="01/02/2019 02:30:05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:background="@color/color_bg"/>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivEmpProfile"
+                        android:src="@drawable/user"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80" />
+
+                    <LinearLayout
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textColor="@color/black"
+                            android:padding="@dimen/dp_5"
+                            android:textSize="@dimen/sp_16"
+                            android:text="Stephan Richard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tvMobileNo"
+                            android:drawableLeft="@drawable/ic_call_black_24dp"
+                            android:maxLines="1"
+                            android:textSize="@dimen/sp_16"
+                            android:ellipsize="end"
+                            android:textColor="@color/grey"
+                            android:padding="@dimen/dp_5"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:text="9876543210"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:background="@color/color_bg"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_15"
+                android:layout_marginTop="@dimen/dp_8"
+                android:textColor="@color/black"
+                android:text="Your Rating &amp; Review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/RatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:soundEffectsEnabled="true"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar" />
+
+            <TextView
+                android:id="@+id/tvComment"
+                android:maxLines="1"
+                android:textSize="@dimen/sp_12"
+                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:padding="@dimen/dp_5"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+           <!-- <Button
+                android:id="@+id/btFeedback"
+                android:layout_marginTop="@dimen/dp_25"
+                android:text="@string/feedback_complete_job"
+                style="@style/ButtonTheam"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvFileComplain"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@android:color/holo_red_dark"
+                android:padding="@dimen/dp_10"
+                android:textSize="@dimen/sp_16"
+                android:text="@string/file_complain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>-->
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>
+
+
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.ondemandservice.android.ui.activity.CategoryActivity">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvDescription"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvScheduleDate"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_dialog"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivEmpProfile"
+                    android:src="@drawable/user"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80" />
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@android:color/black"
+                        android:padding="@dimen/dp_5"
+                        android:textSize="@dimen/sp_16"
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tvMobileNo"
+                        android:drawableLeft="@drawable/ic_call_black_24dp"
+                        android:maxLines="1"
+                        android:textSize="@dimen/sp_16"
+                        android:ellipsize="end"
+                        android:textColor="@android:color/black"
+                        android:padding="@dimen/dp_5"
+                        android:text="aaaaaaaaaaaaaa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="@dimen/dp_5"
+                    android:padding="@dimen/dp_5"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_16"
+                        android:padding="@dimen/dp_5"
+                        android:textColor="@android:color/black"
+                        android:text="Your Comment and Rating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:isIndicator="true"
+                        android:soundEffectsEnabled="true"
+                        style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                        android:theme="@style/RatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="0.5" />
+                    <TextView
+                        android:id="@+id/tvComment"
+                        android:maxLines="1"
+                        android:textSize="@dimen/sp_12"
+                        android:ellipsize="end"
+                        android:textColor="@android:color/black"
+                        android:padding="@dimen/dp_5"
+                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>-->

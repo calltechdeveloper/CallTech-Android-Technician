@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:listitem="http://schemas.android.com/apk/res-auto">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ondemandservice.android.ui.activity.CategoryActivity">
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rvMessage"
+    android:layout_margin="@dimen/dp_5"
+    android:layout_above="@+id/llMessage"
+    tools:listitem="@layout/message_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/llMessage"
+        android:padding="@dimen/dp_3"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/etMessage"
+            android:hint="@string/message"
+            android:gravity="start"
+            style="@style/EditTextMessage"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/dp_5"
+            android:maxLines="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/btSendImage"
+            android:layout_margin="@dimen/dp_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/ic_image" />
+
+        <ImageView
+            android:id="@+id/btSend"
+           android:layout_margin="@dimen/dp_5"
+            android:tint="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_send"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+</RelativeLayout>
+</layout>

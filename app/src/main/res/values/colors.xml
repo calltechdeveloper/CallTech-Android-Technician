@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#002955</color>
+    <color name="colorPrimaryDark">#00ABE9</color>
+    <color name="colorAccent">#89898B</color>
+    <color name="colorYellow">#FECD42</color>
+    <color name="colorFacebook">#4867AA</color>
+    <color name="colorGoogle">#DD5144</color>
+    <color name="hover_color">#E0E0E0</color>
+    <color name="grey_lite">#E0E0E0</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="light_green">#88ed25</color>
+    <color name="hintColor">#B6B6B6</color>
+    <color name="grey">#606060</color>
+    <color name="black">#000000</color>
+    <color name="button_bg">#5bbc93</color>
+    <color name="light_grey">#f0f0f6</color>
+    <color name="color_bg">#efeff4</color>
+    <color name="color_payment">#E8EDEF</color>
+    <color name="colorChat">#1B8AFB</color>
+    <color name="colorChatTheir">#E5E6EA</color>
+
+
+    <color name="colorTrack">#A9A9A9</color>
+
+
+
+
+
+   <color name="colorLightYellow">#FFF6CE</color>
+    <color name="colorYellowText">#896300</color>
+    <!--<color name="colorAccent">#31455A</color>
+   <color name="grey_lite">#E0E0E0</color>
+   <color name="color_white">#FFFFFF</color>-->
+    <color name="grey_button">#bcbbbb</color>
+    <color name="app_bg">#DF3832</color>
+    <color name="fullapp_bg">#0d303d</color>
+    <color name="color_btn_bg">#FD7256</color>
+    <color name="color_headtext">#FFBE00</color>
+    <color name="color_welcomebg">#FFC300</color>
+
+    <color name="color_divider">#DFDFDF</color>
+    <color name="BackgroundtWhiteColor">#dcdcdc</color>
+
+
+    <color name="grey_dark">#808080 </color>
+    <color name="trans">#D1000000 </color>
+    <color name="trans_parant">#D1000000 </color>
+    <color name="colorPrimaryTrans">#4876C37A</color>
+    <color name="red">#ff0000</color>
+
+
+
+    <color name="color_invoice_divider">#FBFBFB</color>
+
+    <color name="colorOrenge">#FD7256</color>
+    <color name="colorPrimaryLite">#915346</color>
+    <color name="gray">#cc222222</color>
+    <color name="green">#008000</color>
+    <color name="green_dark">#1B5E20</color>
+    <color name="transparent">#00FFFFFF</color>
+
+
+
+
+    <!--splash screen color-->
+    <color name="colorSplash1">#94D352</color>
+    <color name="colorSplash2">#EFAA52</color>
+    <color name="colorSplash3">#528ED6</color>
+    <color name="colorSplash4">#E76D08</color>
+    <color name="colorSplash5">#00B252</color>
+
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#FBEDEC</color>
+    <color name="dot_dark_screen2">#FBEDEC</color>
+    <color name="dot_dark_screen3">#FBEDEC</color>
+    <color name="dot_dark_screen4">#FBEDEC</color>
+    <color name="dot_dark_screen5">#FBEDEC</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#00B252</color>
+    <color name="dot_light_screen2">#E76D08</color>
+    <color name="dot_light_screen3">#528ED6</color>
+    <color name="dot_light_screen4">#94D352</color>
+    <color name="dot_light_screen5">#EFAA52</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+</resources>

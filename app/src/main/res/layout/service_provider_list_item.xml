@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="false"
+        app:cardElevation="0dp"
+        android:layout_marginTop="@dimen/dp_1">
+
+        <LinearLayout
+            android:id="@+id/llMain"
+            android:background="?android:attr/selectableItemBackground"            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingRight="@dimen/dp_8"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_7"
+            android:paddingBottom="@dimen/dp_8">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:src="@drawable/user"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/dp_70"
+                android:layout_height="@dimen/dp_70" />
+            <!--<ImageView
+                android:id="@+id/ivProfile"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/user"
+                android:padding="@dimen/dp_2"
+                android:scaleType="fitXY"
+                android:layout_width="@dimen/dp_70"
+                android:layout_height="@dimen/dp_70"
+                />-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:text="Stephan Richard"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:textColor="@color/grey_dark"
+                    android:singleLine="true"
+                    android:text="17/14 Garden Road, New Colony, Delhi  "
+                    android:textSize="@dimen/sp_16"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:text="@string/no_of_job_done"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tvNoOfJobDone"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:isIndicator="true"
+                        android:soundEffectsEnabled="true"
+                        style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                        android:theme="@style/RatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="0.5" />
+                    <TextView
+                        android:id="@+id/tvTotalRating"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:gravity="center_horizontal"
+                        android:text="@string/out_of_46"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/cbSelect"
+                android:padding="@dimen/dp_2"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

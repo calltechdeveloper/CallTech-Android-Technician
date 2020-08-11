@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llMain"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/dp_5"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:background="@drawable/bg_dialog"
+    android:padding="@dimen/dp_5"
+    android:layout_margin="@dimen/dp_10"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:padding="@dimen/dp_10"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:text="Job Details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <CheckBox
+    android:id="@+id/cbImmediate"
+    android:text="Immediate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/llDateTime"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvDate"
+        android:textColor="@android:color/black"
+        android:hint="@string/select_date"
+        android:padding="@dimen/dp_15"
+        android:background="@drawable/bg_dialog"
+        android:layout_weight="1"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tvTime"
+            android:textColor="@android:color/black"
+            android:hint="@string/select_time"
+            android:padding="@dimen/dp_15"
+            android:background="@drawable/bg_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <EditText
+        android:gravity="start"
+        android:id="@+id/etJobDetails"
+        android:hint="Job Details"
+        style="@style/EditTextTheam"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100" />
+    <Button
+        android:id="@+id/btDone"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_gravity="end"
+        android:textAllCaps="false"
+        android:text="Done"
+        style="@style/ButtonTheam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+</LinearLayout>
+</layout>

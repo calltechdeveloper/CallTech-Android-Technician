@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_alignParentTop="true"
+            android:id="@+id/lytInvoiceAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightYellow"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+          >
+
+            <TextView
+                android:id="@+id/tvInvoiceAmount"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
+
+
+   <ImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:src="@drawable/qest"
+       android:id="@+id/infopayment"
+       android:layout_marginEnd="5dp"
+  android:layout_alignParentEnd="true"
+    />
+
+        </RelativeLayout>
+
+        <View
+            android:visibility="visible"
+            android:layout_below="@+id/lytInvoiceAmount"
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:background="@color/grey"
+            android:layout_height=".5dp"/>
+
+        <LinearLayout
+            android:layout_below="@+id/view"
+            android:layout_above="@+id/llButton"
+            android:padding="@dimen/dp_10"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:id="@+id/linearlayout">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/user"/>
+
+            <TextView
+                android:visibility="visible"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:id="@+id/jobuser"
+                android:layout_gravity="center_vertical"
+android:layout_marginLeft="10dp"
+                android:gravity="start"
+
+                android:textColor="@color/grey"
+                android:text="Job name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_marginTop="10dp">
+
+          <TextView
+              android:visibility="visible"
+              android:textSize="16dp"
+              android:textStyle="bold"
+              android:gravity="start"
+
+              android:textColor="@color/grey"
+              android:text="Job name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" />
+          <TextView
+              android:visibility="visible"
+              android:id="@+id/tvjobname"
+              android:textSize="14dp"
+              android:layout_marginTop="5dp"
+              android:gravity="start"
+              android:textColor="@color/grey"
+              android:text="name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" />
+
+      </LinearLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:visibility="visible"
+            android:textSize="16dp"
+            android:textStyle="bold"
+
+            android:gravity="start"
+            android:textColor="@color/grey"
+            android:text="Schduled Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/tvScheduleDate"
+            android:textSize="14dp"
+            android:layout_marginTop="5dp"
+            android:gravity="start"
+            android:textColor="@color/grey"
+            android:text="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:visibility="visible"
+
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:textColor="@color/grey"
+            android:text="Hours Required "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+
+            android:id="@+id/tvhourrate"
+            android:layout_marginTop="5dp"
+            android:textStyle="normal"
+            android:textSize="14dp"
+            android:textColor="@color/grey"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="fgdfgdfgdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:visibility="visible"
+
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:textColor="@color/grey"
+            android:text="Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tvlocation"
+android:textSize="14dp"
+            android:textStyle="normal"
+            android:textColor="@color/grey"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="fgdfgdfgdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:visibility="visible"
+
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:textColor="@color/grey"
+            android:text="Job Descriptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tvdescription"
+                android:textSize="14dp"
+            android:textStyle="normal"
+            android:textColor="@color/grey"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="fgdfgdfgdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llButton"
+            android:padding="@dimen/dp_10"
+
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ivAccept"
+                android:background="@drawable/acceptbutton"
+                android:clickable="true"
+                android:layout_gravity="center"
+                android:gravity="end"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                 android:text="Accept"
+                android:visibility="gone"
+                android:textColor="#02ABE9"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <Button
+                android:id="@+id/btSendInvoice"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="Send Proposal"
+                android:textAllCaps="false"
+                android:textColor="#02ABE9"
+                android:background="@drawable/acceptbutton"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+            <TextView
+                android:id="@+id/ivDecline"
+                android:background="@drawable/denybutton"
+                android:clickable="true"
+                android:layout_gravity="center"
+                   android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                  android:padding="10dp"
+                android:text="Decline"
+                android:visibility="gone"
+                android:textColor="@color/red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+</layout>

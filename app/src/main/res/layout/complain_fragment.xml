@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        tools:context="com.ondemandservice.android.ui.activity.RatingCommentActivity">
+
+        <EditText
+            android:id="@+id/etSubject"
+            android:gravity="start"
+            android:hint="@string/subject"
+            android:maxLength="50"
+            android:imeOptions="actionDone"
+            android:layout_margin="@dimen/dp_10"
+            style="@style/EditTextTheam"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:id="@+id/etComment"
+            android:gravity="start"
+            android:hint="@string/comment"
+            android:imeOptions="actionDone"
+            android:layout_margin="@dimen/dp_10"
+            style="@style/EditTextTheam"
+            android:maxLines="5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100" />
+        <Button
+            android:id="@+id/btSubmit"
+            android:layout_margin="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:text="@string/Submit"
+            style="@style/ButtonTheam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>

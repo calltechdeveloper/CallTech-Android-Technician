@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/tytHeader"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_8"
+                android:background="@color/color_payment"
+                android:text="CARD HOLDER NAME"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="@dimen/dp_8"
+                android:text=""
+                android:hint="Card Holder Name"
+                android:background="@drawable/edit_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_8"
+                android:background="@color/color_payment"
+                android:text="CARD NUMBER"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="@dimen/dp_8"
+                android:text=""
+                android:hint="Card Number"
+                android:background="@drawable/edit_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_8"
+                android:background="@color/color_payment"
+                android:text="EXPIRY DATE"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="@dimen/dp_8"
+                android:text=""
+                android:hint="MM | YY"
+                android:background="@drawable/edit_text"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_8"
+                android:background="@color/color_payment"
+                android:text="CVV"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="@dimen/dp_8"
+                android:text=""
+                android:hint="CVV Number"
+                android:background="@drawable/edit_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_8"
+                android:background="@color/color_payment"
+                android:text="CARD DESCRIPTION"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="@dimen/dp_8"
+                android:text=""
+                android:hint="eg. Personal Card"
+                android:background="@drawable/edit_text"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

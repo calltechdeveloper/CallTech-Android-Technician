@@ -1,0 +1,229 @@
+<resources>
+    <string name="app_name">CallTech Technician</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">Get Started</string>
+    <string name="existing_user">Already a user? <u><font color="#ffff0000">Sign in</font></u> </string>
+    <!--<string name="google_api_key">AIzaSyBaXRkM9gJF7beDTJ5Ip9WaGkaE839hOSs</string>-->
+    <!--<string name="google_api_key">AIzaSyCqlOtcAXoyapXgIurLGGLMydymywQL9BA</string>-->
+    <string name="facebook_app_id">172769293502390</string>
+    <string name="ride_now">Ride Now </string>
+    <string name="ride_later">Ride Later </string>
+
+
+    <string name="otp_no_user"> <font color="#082029">OTP will send on this number</font></string>
+    <string name="otp_send_user"> <font color="#082029">OTP has been send on </font></string>
+
+
+    <string name="slide_1_title">Became a Millionaire</string>
+    <string name="slide_1_desc">You need to come up with a workable plan and put it into action Calculate what you need to earn and how to invest!</string>
+
+    <string name="slide_2_title">Soft Loans</string>
+    <string name="slide_2_desc">The economy can sometimes become financially unfriendly and a loan can be of great help to remedy this situation!</string>
+
+    <string name="slide_3_title">Branded Shopping</string>
+    <string name="slide_3_desc">Semua dalam genggaman mu </string>
+
+    <string name="slide_4_title">Welcome To TulzBux </string>
+    <string name="slide_4_desc">Semua dalam genggaman mu </string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <!--Registration page-->
+
+    <string name="first_name">Full Name</string>
+    <string name="company_name">Company Name</string>
+    <string name="mobile">Mobile No.</string>
+    <string name="email">Email</string>
+    <string name="dob">Date Of Birth</string>
+    <string name="id">ID</string>
+
+    <string name="vehicle_number">Enter vehicle number</string>
+    <string name="vehicle_model">Enter vehicle model</string>
+    <string name="vehicle_color">Enter vehicle color</string>
+
+    <string name="driver_licence">Enter driver licence number</string>
+    <string name="registration">Registration</string>
+    <string name="read_terms_conditions"><u><![CDATA[Terms & Conditions]]></u></string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="action_settings">Settings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="confirm_booking">CONFIRM BOOKING</string>
+    <string name="get_started">Get Start</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="change_mobile_no"><u>Change mobile no.</u></string>
+    <string name="resend">Re-Send</string>
+    <string name="_00_00">00:00</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_email">Enter email id</string>
+    <string name="Submit">Submit</string>
+    <string name="enter_phone_no">Enter Phone No.</string>
+    <string name="enter_valid_phone_no">Please enter valid phone no.</string>
+    <string name="enter_otp_no">Please enter Otp no.</string>
+    <string name="enter_valid_otp_no">Please enter valid Otp no.</string>
+    <string name="please_enter_name">Please enter Name.</string>
+    <string name="please_enter_email">Please enter email.</string>
+    <string name="please_enter_valid_email">Please enter valid email.</string>
+    <string name="internet_connection">Please check your internet connection</string>
+    <string name="camera_permission_denial">camera permission denial</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="service_category">Service Category</string>
+    <string name="add_to_invite">Add to Invite</string>
+    <string name="no_of_jobs_done">No of jobs done</string>
+
+    <string-array name="category">
+        <item>Both</item>
+        <item>Individual</item>
+        <item>Agency</item>
+    </string-array>
+    <string name="title_activity_home">Home</string>
+
+    <string name="action_search">Next</string>
+    <string name="search_menu">Search</string>
+    <string name="app_prf">app_prf</string>
+    <string name="app_prf_device">app_prf_device</string>
+    <string name="dummy_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
+    <string name="exit_from_app">Are you sure you want to exit?</string>
+    <string name="dummy_message">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</string>
+    <string name="alert">Alert</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="take_a_photo">Take Photo</string>
+    <string name="choose_from_gallery">Chose From Gallery</string>
+    <string name="choose_photo">Chose Photo</string>
+    <string name="cancel">Cancel</string>
+    <string name="saving_image">Saving Image</string>
+    <string name="preparing_card">preparing card</string>
+    <string name="no_storage_card">No storage card</string>
+    <string name="not_enough_space">Not enough space</string>
+    <string name="cam_cancel">Cancel</string>
+    <!--<string name="api_key_google">AIzaSyAvy9Y4L2MBkYv6WWpHfXXQEXT-1I7rMM4</string>-->
+
+    -
+    <string name="api_key_google">AIzaSyDQ0DpGebHc465i5EMJJOH0tvuL1lUT_dw</string>
+
+    <string name="location_client_is_connected">Location client is connected</string>
+    <string name="location_client_is_going_to_connect">location client is going to connect</string>
+    <string name="on_connection_failed">on connection failed</string>
+    <string name="on_connected">on connected</string>
+    <string name="on_location_changed">on location changed</string>
+    <string name="connection_suspended">connection suspended</string>
+    <string name="start_update">start update</string>
+    <string name="stop_periodic_updates">stop periodic updates</string>
+    <string name="start_periodics_updates">start periodic updates</string>
+    <string name="file_provider_authority" translatable="false">com.calltechservice.fileprovider</string>
+    <string name="out_of_46">out of 46</string>
+    <string name="home">Home</string>
+    <string name="invite_cart">Invite Cart</string>
+    <string name="my_account">My Account</string>
+    <string name="notification">Notification</string>
+    <string name="about_us">About Us</string>
+    <string name="please_select_location_whwre_your_want_to_take_service">Please select location where your want to take service.</string>
+    <string name="use_my_current_location">Use my current location</string>
+    <string name="select_your_location">Select your location</string>
+    <string name="ok">OK</string>
+    <string name="save">SAVE</string>
+    <string name="name">Name</string>
+    <string name="experiance">Experiance</string>
+    <string name="comma">:</string>
+    <string name="_20_years">20 years</string>
+    <string name="servicetype">ServiceType</string>
+    <string name="plumber">Plumber</string>
+    <string name="message">Message..</string>
+    <string name="enter_mobile_no">Enter Mobile No.</string>
+    <string name="saurav_singh">Saurav Singh</string>
+    <string name="comment">Comment..</string>
+    <string name="saurav">Lav</string>
+    <string name="_5_years">5 years</string>
+    <string name="status">Status:</string>
+    <string name="accepted">Accepted</string>
+    <string name="chat">Chat</string>
+    <string name="_21st_feb_2017_2_00">21st Feb, 2017, 2:00</string>
+    <string name="saurav_gmail_com">lav@gmail.com</string>
+    <string name="hello_saurav_is_ready_to_do_your_job">hello lav is ready to do your job.</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="_20">20</string>
+    <string name="total_years_of_experience">Total years of experience</string>
+    <string name="aditional_informatrion">Additional Information:</string>
+    <string name="service_category_name">Service Category Name</string>
+    <string name="no_of_job_done">No of job done :</string>
+    <string name="feedback">Feedback</string>
+    <string name="feedback_complete_job">Send Feedback to Complete Job</string>
+    <string name="completed">Completed</string>
+    <string name="__00">00:</string>
+    <string name="_00_">00:00</string>
+    <string name="deviceToken">deviceToken</string>
+    <string name="device_token">deviceToken</string>
+
+    <string name="edit">Edit</string>
+    <string name="select_date">MM/DD/YY</string>
+    <string name="select_time">00:00</string>
+    <string name="enter_job_details">Please enter job details</string>
+    <string name="req_type">Please select immediate or enter date time</string>
+    <string name="server_not_responding">Server not responding</string>
+    <string name="use_can_use_one">You can use only one location</string>
+    <string name="job_schedlued">Job Scheduled On:</string>
+    <string name="job_completed">Job Completed On:</string>
+    <string name="employee_details">Employee Details</string>
+    <string name="file_complain"><u>File Complain</u></string>
+    <string name="imediate_requirment">Immediate Requirement</string>
+    <string name="running_jobs">Running Jobs</string>
+    <string name="job_history">Job History</string>
+    <string name="rate_employee">Please give rating</string>
+    <string name="enter_comment">Please enter your comment</string>
+    <string name="subject">Enter Subject</string>
+    <string name="enter_subject">Please enter subject</string>
+    <string name="cat_not_available">Sorry! Category Not Avilable</string>
+    <string name="login">Login</string>
+    <string name="guest">Guest</string>
+    <string name="pay_now">Pay</string>
+    <string name="award">Award Job</string>
+    <string name="done">Done</string>
+    <string name="enter_ammount">Enter Amoount</string>
+    <string name="enter_amount_that_you_discuss_with_employee_to_pay_for_this_job">Enter amount that you discuss with employee to pay for this job.</string>
+    <string name="job">Jobs</string>
+    <string name="pay">Payment</string>
+    <string name="my_service">My Services</string>
+    <string name="offers">Offers</string>
+    <string name="invite">Invite a friend</string>
+    <string name="share">Share</string>
+
+    <string name="register">Register</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://122.160.42.242\",\n  }\n}]</string>
+    <string name="went_wrong">Something went wrong.</string>
+    <string name="logout_from_app">Are you sure you want to logout?</string>
+    <string name="logout">Sign Out</string>
+
+    <string name="about_provider">Stephan Richard really are able to handel a wide array of plumbing service that are completed, including shower plumbing, repairs to toilets, leaks burst pipes and much more.</string>
+    <string name="action_save">Save</string>
+    <string name="action_post">Post</string>
+    <string name="terms"><![CDATA[Terms & Privacy]]></string>
+    <string name="help">Help Center</string>
+    <string name="check_network_connection">Please check your Internet connection</string>
+    <string name="error">Error</string>
+
+
+    <string name="select_your_service_area">Select your service area</string>
+    <string name="use_your_cuttent_locatio">Use your current location</string>
+    <string name="click_here_to_select_service_area"><u>Click here to select service area</u></string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email address</string>
+    <string name="private_">Private</string>
+    <string name="company">Company</string>
+
+</resources>

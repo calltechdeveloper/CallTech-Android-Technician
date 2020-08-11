@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_margin="@dimen/dp_5"
+                android:padding="@dimen/dp_10"
+                android:background="@drawable/dialog_blue_bg"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="30sp"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:text="Rate Me!!"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvAmmountClient"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:padding="@dimen/dp_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+                <RatingBar
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    android:theme="@style/RatingBarNew"
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:layout_marginTop="20dp"
+                    android:isIndicator="false"
+                    android:clickable="true"
+                    android:rating="1"/>
+
+
+                <EditText
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_round"
+                    android:gravity="start"
+                    android:padding="@dimen/dp_5"
+                    android:hint="Write your review..."
+                    android:text=""
+                    android:textSize="@dimen/sp_14"
+                    android:lines="3"/>
+
+               <!-- <RatingBar
+                    android:layout_gravity="center"
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:scaleX="3.0"
+                    android:scaleY="3.0"
+                    android:numStars="5"
+                    android:isIndicator="false"
+                    android:clickable="true"
+                    android:stepSize=".5"
+                    android:rating="5" />-->
+
+                <Button
+                    android:id="@+id/btSend"
+                    android:background="@drawable/btn_round"
+                    android:layout_marginTop="@dimen/dp_40"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

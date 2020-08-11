@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "1094899527256",
+    "firebase_url": "https://calltech.firebaseio.com",
+    "project_id": "calltech",
+    "storage_bucket": "calltech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094899527256:android:0c9d1bd13192d8395fe42d",
+        "android_client_info": {
+          "package_name": "com.calltechit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094899527256-0pqvb5pinf1lv39p1d0mat8hk6vevhph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.calltechit",
+            "certificate_hash": "1f103933f62cca5eebefee11de83870c4ce2fe1a"
+          }
+        },
+        {
+          "client_id": "1094899527256-cm42h5jriidnb8f3cq6fppme34jgm8qp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ0DpGebHc465i5EMJJOH0tvuL1lUT_dw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094899527256-cm42h5jriidnb8f3cq6fppme34jgm8qp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1094899527256-iccekj55cjmkv8ceudba9tooueujc8d3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.maxtratechnologies.CallTech"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094899527256:android:c8086a93472681085fe42d",
+        "android_client_info": {
+          "package_name": "com.calltechservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094899527256-fi7bsg8hs0nsj7qt1gbcrriip1o033lc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.calltechservice",
+            "certificate_hash": "1f103933f62cca5eebefee11de83870c4ce2fe1a"
+          }
+        },
+        {
+          "client_id": "1094899527256-cm42h5jriidnb8f3cq6fppme34jgm8qp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ0DpGebHc465i5EMJJOH0tvuL1lUT_dw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094899527256-cm42h5jriidnb8f3cq6fppme34jgm8qp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1094899527256-iccekj55cjmkv8ceudba9tooueujc8d3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.maxtratechnologies.CallTech"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

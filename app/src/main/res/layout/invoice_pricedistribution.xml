@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:layout_alignParentTop="true"
+            android:id="@+id/lytInvoiceAmount"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightYellow"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvInvoiceAmount"
+                android:textSize="18dp"
+                android:textStyle="normal"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Provider Charge"/>
+
+
+
+            <TextView
+                android:id="@+id/tvProvicercharge"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R 470"/>
+
+    </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/grey_lite"/>
+
+        <!--&lt;!&ndash;<view&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="1dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginEnd="10dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginStart="10dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@color/gray">&ndash;&gt;-->
+
+        <!--</view>-->
+        <RelativeLayout
+            android:visibility="visible"
+            android:layout_alignParentTop="true"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightYellow"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <TextView
+
+                android:textSize="18dp"
+                android:textStyle="normal"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Fee"/>
+
+            <TextView
+                android:id="@+id/tvServicecharge"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R 30"/>
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/grey_lite"/>
+
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:layout_alignParentTop="true"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightYellow"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <TextView
+
+                android:textSize="18dp"
+                android:textStyle="normal"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KM Charges"/>
+
+            <TextView
+                android:id="@+id/tvKmcharge"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R 30"/>
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/grey_lite"/>
+        <!--<view-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:background="@color/gray">-->
+
+        <!--</view>-->
+        <RelativeLayout
+            android:visibility="visible"
+            android:layout_alignParentTop="true"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightYellow"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <TextView
+
+                android:textSize="18dp"
+                android:textStyle="normal"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Invoice Total Amount "/>
+
+
+            <TextView
+                android:id="@+id/tvInvoicetotalamount"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorYellowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R 500"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/dp_10"
+            android:gravity="bottom">
+            <Button
+                android:id="@+id/btSendInvoice"
+                android:visibility="visible"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="Send"
+                android:textAllCaps="false"
+                android:textColor="#02ABE9"
+                android:background="@drawable/acceptbutton"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

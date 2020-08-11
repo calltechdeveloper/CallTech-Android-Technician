@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:background="@drawable/bg_dialog"
+    android:padding="@dimen/dp_20"
+    android:layout_margin="@dimen/dp_40"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_16"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:text="@string/alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_marginTop="@dimen/dp_5"
+        android:textSize="@dimen/sp_16"
+        android:textColor="#141d63"
+        android:gravity="center"
+        android:text="@string/exit_from_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_20"
+       android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvYes"
+            android:gravity="center"
+            android:text="@string/yes"
+            android:textColor="#424451"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+        android:id="@+id/tvNo"
+        android:gravity="center"
+        android:text="@string/no"
+        android:textColor="#424451"
+        android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
+</LinearLayout>
+</layout>

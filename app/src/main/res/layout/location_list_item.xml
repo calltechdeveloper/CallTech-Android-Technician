@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardUseCompatPadding="true"
+                    app:elevation="@dimen/dp_2">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dp_10">
+
+                                <TextView
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:id="@+id/tvLocation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:layout_marginRight="@dimen/dp_5"
+                                    android:layout_toLeftOf="@+id/ivIcon"
+                                    android:textColor="@color/grey"
+                                    android:text="Cleaning Service"/>
+
+                            <ImageView
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/ivIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tint="@color/red"
+                                android:src="@drawable/ic_cancel"/>
+
+                        </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+</layout>

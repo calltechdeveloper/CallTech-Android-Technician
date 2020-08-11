@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        tools:context="com.ondemandservice.android.ui.activity.RatingCommentActivity">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivEmpProfile"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:src="@drawable/user"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="@dimen/dp_90" />
+        <TextView
+            android:id="@+id/tvEmpName"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/saurav_singh"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_gravity="center"
+            android:isIndicator="false"
+            android:soundEffectsEnabled="false"
+            style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+            android:theme="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5" />
+        <EditText
+            android:id="@+id/etComment"
+            android:gravity="start"
+            android:hint="@string/comment"
+            android:imeOptions="actionDone"
+            android:layout_margin="@dimen/dp_10"
+            style="@style/EditTextTheam"
+            android:maxLines="5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100" />
+        <Button
+            android:id="@+id/btSubmit"
+            android:layout_margin="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:text="@string/Submit"
+            style="@style/ButtonTheam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>
