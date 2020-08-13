@@ -49,7 +49,7 @@ public class PaymentFragment extends BaseFragment {
         //navigationView.setCheckedItem(R.id.payment_cart);
         ((HomeActivity) getActivity()).changeIcon(true);
         //getActivity().setTitle("Payment");
-        Objects.requireNonNull(getActivity()).setTitle("Payment");
+        requireActivity().setTitle("Payment");
 
     }
 

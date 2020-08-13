@@ -1,119 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="0dp"
+            app:cardUseCompatPadding="false"
+            app:elevation="0dp">
 
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="0dp"
-                    app:cardUseCompatPadding="false"
-                    app:elevation="0dp">
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    tools:targetApi="lollipop">
 
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dp_10"
-                            android:gravity="center">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:cardCornerRadius="8dp"
-                                    android:elevation="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/ivIcon"
-                                        android:layout_width="@dimen/dp_80"
-                                        android:layout_height="@dimen/dp_80"
-                                        android:src="@drawable/house_things"
-                                        android:scaleType="fitXY"/>
-                                </androidx.cardview.widget.CardView>
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-
-
-                                    <ImageView
-                                        android:id="@+id/ivLocation"
-                                        android:layout_width="@dimen/dp_24"
-                                        android:layout_height="@dimen/dp_24"
-                                        android:layout_alignParentRight="true"
-                                        android:src="@drawable/ic_location"/>
-
-                                    <ImageView
-                                        android:id="@+id/delete"
-
-                                        android:tint="@color/red"
-                                        android:layout_width="@dimen/dp_24"
-                                        android:layout_height="@dimen/dp_24"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_alignParentBottom="true"
-                                        android:src="@drawable/delete"/>
-
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginLeft="@dimen/dp_10"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/tvTitle"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_16"
-                                        android:gravity="center"
-                                        android:text="Cleaning Service"/>
-
-                                    <TextView
-                                        android:id="@+id/tvSelectLocation"
-                                        android:layout_marginTop="@dimen/dp_10"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_12"
-                                        android:minLines="1"
-                                        android:maxLines="3"
-                                        android:textColor="@color/gray"
-                                        android:text="Service Location: "/>
-
-
-                                </LinearLayout>
-                                </RelativeLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
+                    <ImageView
+                        android:id="@+id/ivIcon"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80"
+                        android:contentDescription="@null"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/house_things" />
 
                 </androidx.cardview.widget.CardView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height=".5dp"
-        android:background="@color/color_bg"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                    <ImageView
+                        android:id="@+id/ivLocation"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_alignParentEnd="true"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_location" />
 
-</LinearLayout>
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:contentDescription="@null"
+                        android:src="@drawable/delete"
+                        android:tint="@color/red" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:orientation="vertical"
+                        tools:ignore="RelativeOverlap">
+
+                        <TextView
+                            android:id="@+id/tvTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/cleaning_service"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:id="@+id/tvSelectLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:maxLines="3"
+                            android:minLines="1"
+                            android:text="@string/service_location"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/sp_12" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/color_bg" />
+
+    </LinearLayout>
 
 </layout>

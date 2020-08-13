@@ -36,7 +36,7 @@ public class InviteFriendFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ((HomeActivity) Objects.requireNonNull(mContext)).changeIcon(true);
-        Objects.requireNonNull(getActivity()).setTitle("Share");
+        requireActivity().setTitle("Share");
     }
 
     @Override

@@ -1,9 +1,13 @@
 package com.calltechservice.ui.adapter;
 
 import android.content.Context;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.net.Uri;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +31,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         this.serviceSubCtegoryModels = serviceSubCtegoryModels;
     }
 
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_list_item, parent, false);
@@ -41,7 +44,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         holder.binding.tvTitle.setText(model.getService_name());
 
         if (model.getService_image() != null && !model.getService_image().equalsIgnoreCase("")) {
-
             /*Glide.with(context)
                     .load(Uri.parse(model.getService_image())).apply(RequestOptions.fitCenterTransform())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_user))
@@ -53,7 +55,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_user))
                     .apply(RequestOptions.errorOf(R.drawable.ic_user))
                     .into(holder.binding.ivIcon);
-        }else {
+        } else {
             holder.binding.ivIcon.setImageResource(R.drawable.ic_user);
         }
 
@@ -94,8 +96,9 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         return serviceSubCtegoryModels.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         DashboardListItemBinding binding;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
@@ -110,7 +113,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
                 listener.onItemClick(getAdapterPosition(), v);
         }
     }
-
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
