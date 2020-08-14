@@ -40,7 +40,6 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         ServiceCtegoryModel model = serviceCtegoryModels.get(holder.getAdapterPosition());
 
-
         holder.binding.tvTitle.setText(model.getCategory_name());
 
         if (model.getCategory_image() != null && !model.getCategory_image().equalsIgnoreCase("")) {

@@ -136,7 +136,7 @@
     <string name="ok">OK</string>
     <string name="save">SAVE</string>
     <string name="name">Name</string>
-    <string name="experiance">Experiance</string>
+    <string name="experiance">Experience</string>
     <string name="comma">:</string>
     <string name="_20_years">20 years</string>
     <string name="servicetype">ServiceType</string>
@@ -186,7 +186,7 @@
     <string name="enter_comment">Please enter your comment</string>
     <string name="subject">Enter Subject</string>
     <string name="enter_subject">Please enter subject</string>
-    <string name="cat_not_available">Sorry! Category Not Avilable</string>
+    <string name="cat_not_available">Sorry! Category Not Available</string>
     <string name="login">Login</string>
     <string name="guest">Guest</string>
     <string name="pay_now">Pay</string>
@@ -225,5 +225,7 @@
     <string name="email_address">Email address</string>
     <string name="private_">Private</string>
     <string name="company">Company</string>
+    <string name="service_location">Service Location:</string>
+    <string name="cleaning_service">Cleaning Service</string>
 
 </resources>

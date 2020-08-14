@@ -72,7 +72,7 @@ public class ServiceProviderDashboardFragment extends BaseFragment implements Vi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Objects.requireNonNull(getActivity()).setTitle("Home");
+        requireActivity().setTitle("Home");
         setDashboardLyt();
         deviceToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("firebasedevice",deviceToken);

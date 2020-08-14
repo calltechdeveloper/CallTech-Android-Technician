@@ -109,7 +109,7 @@ public class NewJobFragment extends BaseFragment implements View.OnClickListener
         navigationView.setCheckedItem(R.id.payment_cart);*/
         ((HomeActivity) getActivity()).changeIcon(false);
         //getActivity().setTitle("Payment");
-        Objects.requireNonNull(getActivity()).setTitle("New job");
+        requireActivity().setTitle("New job");
 
         binding.cbImmediate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

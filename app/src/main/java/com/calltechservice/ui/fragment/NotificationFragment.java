@@ -52,7 +52,7 @@ public class NotificationFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notification, container, false);
         View view = binding.getRoot();
-        Objects.requireNonNull(getActivity()).setTitle("Notification");
+        requireActivity().setTitle("Notification");
         ((HomeActivity) getActivity()).changeIcon(false);
         setRecyslerViw();
 
@@ -63,7 +63,7 @@ public class NotificationFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Objects.requireNonNull(getActivity()).setTitle("Notification");
+        requireActivity().setTitle("Notification");
         notificationAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view) {

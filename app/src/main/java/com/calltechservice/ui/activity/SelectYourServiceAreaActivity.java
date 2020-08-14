@@ -2,7 +2,6 @@ package com.calltechservice.ui.activity;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
@@ -58,11 +57,12 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
     private AskForLocationBinding bindingDialog;
     private List<String> serviceArea;
     private ServiceAreaRequest serviceAreaRequests;
+    private Dialog locationDialog;
 
     private AddRemoveCategoryModel model;
     private String subCategoryId;
-    String selectedjoblocationadd;
-    private LatLng selectedjoblocationlatlong;
+    String selectedJobLocationAdd;
+    private LatLng selectedJobLocationLatLong;
     LatLng currentLocation;
     private LatLng searchedLocation;
     private LatLng selectedLatLang;
@@ -105,11 +105,9 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
             serviceAreaRequests.getAreaList().add(areaList);
 
         }*/
-
         binding.rvAddCategory.setLayoutManager(new LinearLayoutManager(mContext));
         addServiceAreaAdapter = new AddServiceAreaAdapter(mContext, serviceAreaRequests);
         binding.rvAddCategory.setAdapter(addServiceAreaAdapter);
-
     }
 
     private void setToolBar() {
@@ -134,7 +132,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
             case R.id.tvSelectLocation:
                 askLocationForService();
                 break;
-
             case R.id.btSubmit:
                 if (serviceAreaRequests.getAreaList().size() > 0) {
                     callAddLocationAPI();
@@ -147,36 +144,39 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
 
     private void askLocationForService() {
         bindingDialog = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.ask_for_location, null, false);
-        final Dialog dialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(bindingDialog.getRoot());
-        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
-        layoutParams.dimAmount = .7f;
-        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().setAttributes(layoutParams);
-        bindingDialog.cbCurrentLocation.setVisibility(View.GONE);
+        locationDialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar);
+        locationDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        locationDialog.setCancelable(true);
+        locationDialog.setContentView(bindingDialog.getRoot());
+        Window window = locationDialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams layoutParams = window.getAttributes();
+            layoutParams.dimAmount = .7f;
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.setAttributes(layoutParams);
 
-        bindingDialog.btCancel.setOnClickListener(view -> dialog.dismiss());
+            bindingDialog.cbCurrentLocation.setVisibility(View.GONE);
+            bindingDialog.btCancel.setOnClickListener(view -> locationDialog.dismiss());
 
-        bindingDialog.tvSelectLocation.setOnClickListener(view -> {
-            if (isLocationEnabled())
-                showPlacePicker();
-            else
-                showAlert();
-        });
+            bindingDialog.tvSelectLocation.setOnClickListener(view -> {
+                if (isLocationEnabled())
+                    showPlacePicker();
+                else
+                    showAlert();
+            });
 
-        bindingDialog.btOk.setOnClickListener(view -> {
-            if (!bindingDialog.tvSelectLocation.getText().equals("")) {
-                dialog.dismiss();
-            } else {
-                Toast.makeText(SelectYourServiceAreaActivity.this, "please select the address!!!!", Toast.LENGTH_SHORT).show();
-            }
-        });
+            bindingDialog.btOk.setOnClickListener(view -> {
+                if (!bindingDialog.tvSelectLocation.getText().equals("")) {
+                    locationDialog.dismiss();
+                } else {
+                    Toast.makeText(SelectYourServiceAreaActivity.this, "please select the address!!!!", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-        dialog.show();
+            locationDialog.show();
+        }
     }
 
 
@@ -188,58 +188,40 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
 
-                StringBuilder strReturnedAddress = new StringBuilder("");
+                StringBuilder strReturnedAddress = new StringBuilder();
 
                 for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
                 strAdd = strReturnedAddress.toString();
                 //   binding.etjoblocation.setText( strAdd );
-
-            } else {
-
             }
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         return strAdd;
     }
-
 
     private boolean isLocationEnabled() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    private boolean checkGPSEnabled() {
-        if (!isLocationEnabled())
-            showAlert();
-        return isLocationEnabled();
-    }
-
     private void showAlert() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Enable Location")
                 .setMessage("Locations Settings is set to 'Off'.\nEnable Location to use this app")
-                .setPositiveButton("Location Settings", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(intent);
-                    }
+                .setPositiveButton("Location Settings", (dialog, id) -> {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        dialog.cancel();
-                    }
+                .setNegativeButton("Cancel", (dialog, id) -> {
+                    // if this button is clicked, just close
+                    // the dialog box and do nothing
+                    dialog.cancel();
                 });
         alertDialogBuilder.show();
     }
-
 
     private void showPlacePicker() {
         PingPlacePicker.IntentBuilder builder = new PingPlacePicker.IntentBuilder();
@@ -261,64 +243,59 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ((requestCode == PLACE_PICKER_REQUEST) && (resultCode == RESULT_OK)) {
-            com.google.android.libraries.places.api.model.Place place = (com.google.android.libraries.places.api.model.Place) PingPlacePicker.getPlace(data);
+        if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
+            com.google.android.libraries.places.api.model.Place place = PingPlacePicker.getPlace(data);
             if (place != null) {
                 Toast.makeText(this, "You selected the place: " + place.getName(), Toast.LENGTH_SHORT).show();
                 AreaList areaList = new AreaList();
-
-
                 //String location = MapDisplayUtils.getAddressFromLatLng(this, place.getLatLng().latitude,place.getLatLng().longitude);
                 //Log.e("hi ", "<<if place>> " +location);
 
-
+                LatLng latLng = place.getLatLng();
                 if (place.getAddress() != null && place.getAddress().length() > 0) {
-
                     areaList.setAreaName(place.getAddress() + "");
                 } else {
-                    String location = MapDisplayUtils.getAddressFromLatLng(this, place.getLatLng().latitude, place.getLatLng().longitude);
+                    String location = MapDisplayUtils.getAddressFromLatLng(this, latLng.latitude, latLng.longitude);
                     Log.e("hi ", "<<if place>> " + location);
                     areaList.setAreaName(location);
                 }
                 bindingDialog.tvSelectLocation.setText(place.getAddress());
-                areaList.setLat(place.getLatLng().latitude + "");
-                areaList.setLng(place.getLatLng().longitude + "");
-                serviceAreaRequests.getAreaList().add(areaList);
-                addServiceAreaAdapter.notifyDataSetChanged();
-                Log.e("Service area", "lat" + place.getLatLng().latitude + "longitude" + place.getLatLng().longitude);
-
+                if (latLng != null) {
+                    areaList.setLat(latLng.latitude + "");
+                    areaList.setLng(latLng.longitude + "");
+                    serviceAreaRequests.getAreaList().add(areaList);
+                    addServiceAreaAdapter.notifyDataSetChanged();
+                    locationDialog.dismiss();
+                    Log.e("Service area", "lat" + latLng.latitude + "longitude" + latLng.longitude);
+                }
             }
         }
+        locationDialog.dismiss();
     }
 
-
     private void callAddLocationAPI() {
-
-        StringBuilder stringLat = new StringBuilder("");
-        StringBuilder stringLng = new StringBuilder("");
-        StringBuilder stringArea = new StringBuilder("");
+        StringBuilder stringLat = new StringBuilder();
+        StringBuilder stringLng = new StringBuilder();
+        StringBuilder stringArea = new StringBuilder();
         for (int i = 0; i < serviceAreaRequests.getAreaList().size(); i++) {
             if (!stringLat.toString().equalsIgnoreCase("")) {
-                stringLat.append("," + serviceAreaRequests.getAreaList().get(i).getLat());
+                stringLat.append(",").append(serviceAreaRequests.getAreaList().get(i).getLat());
             } else {
                 stringLat.append(serviceAreaRequests.getAreaList().get(i).getLat());
             }
 
-
             if (!stringLng.toString().equalsIgnoreCase("")) {
-                stringLng.append("," + serviceAreaRequests.getAreaList().get(i).getLng());
+                stringLng.append(",").append(serviceAreaRequests.getAreaList().get(i).getLng());
             } else {
                 stringLng.append(serviceAreaRequests.getAreaList().get(i).getLng());
             }
 
             if (!stringArea.toString().equalsIgnoreCase("")) {
-                stringArea.append("~" + serviceAreaRequests.getAreaList().get(i).getAreaName());
+                stringArea.append("~").append(serviceAreaRequests.getAreaList().get(i).getAreaName());
             } else {
                 stringArea.append(serviceAreaRequests.getAreaList().get(i).getAreaName());
             }
-
         }
-
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("service_provider_id", userPref.getUser().getUserId());
@@ -334,15 +311,11 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
                     if (commonResponse.getStatus() == 1 && commonResponse.getData() != null) {
-
                        /* userPref.setLogin(true);
 
                         startActivity(new Intent(this, HomeActivity.class));
                         finish();*/
-
                         finish();
-
-
                     } else {
                         utils.simpleAlert(this, getString(R.string.error), commonResponse.getMessage());
                         hideProgressDialog();
@@ -356,7 +329,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                     }
                 });
     }
-
 
     private void callAddServiceListApi() {
         /*shoprogress();
@@ -393,21 +365,15 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
 
     public void startLocation() {
         if (PermissionUtils.checkPermissionLocation(this)) {
-            locationTracker = new LocationTracker(this, new LocationResult() {
-                @Override
-                public void gotLocation(Location location) {
-                    currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    selectedLatLang = currentLocation;
-                }
+            locationTracker = new LocationTracker(this, location -> {
+                currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                selectedLatLang = currentLocation;
             });
             locationTracker.updateLocation();
-
         } else {
             PermissionUtils.requestPermissionLocation(this);
         }
 
-
-//
 //        Dexter.withActivity(this)
 //                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 //                .withListener(new PermissionListener() {
