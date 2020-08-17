@@ -1,14 +1,16 @@
 package com.calltechservice.ui.adapter;
 
 import android.content.Context;
-import androidx.databinding.DataBindingUtil;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.calltechservice.databinding.OnGoingItemBinding;
+
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.calltechservice.R;
+import com.calltechservice.databinding.OnGoingItemBinding;
 import com.calltechservice.model.response.OnGoingJobResponse;
 import com.calltechservice.utils.CommonUtils;
 
@@ -26,34 +28,34 @@ public class OnGoingAdapter extends RecyclerView.Adapter<OnGoingAdapter.MyViewHo
 
         public MyViewHolder(View view) {
             super(view);
-            binding= DataBindingUtil.bind(view);
+            binding = DataBindingUtil.bind(view);
 
         }
     }
 
     public OnGoingAdapter(Context context, List<OnGoingJobResponse> onGoingJobResponseList) {
-        this.context=context;
-        this.onGoingJobResponseList=onGoingJobResponseList;
+        this.context = context;
+        this.onGoingJobResponseList = onGoingJobResponseList;
     }
 
     @Override
     public int getItemViewType(int position) {
         return position;
     }
- 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.on_going_item, parent, false);
-        CommonUtils.setAnimation(itemView,context);
+        CommonUtils.setAnimation(itemView, context);
         return new MyViewHolder(itemView);
     }
- 
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         OnGoingJobResponse model = onGoingJobResponseList.get(holder.getAdapterPosition());
-        holder.binding.tvTitle.setText(model.getJobDetails().getTitle()!=null?model.getJobDetails().getTitle():"");
-        holder.binding.tvDescription.setText(model.getJobDetails().getDescription()!=null?model.getJobDetails().getDescription().trim():"");
+        holder.binding.tvTitle.setText(model.getJobDetails().getTitle() != null ? model.getJobDetails().getTitle() : "");
+        holder.binding.tvDescription.setText(model.getJobDetails().getDescription() != null ? model.getJobDetails().getDescription().trim() : "");
         holder.binding.tvName.setText(model.getProviderDetails().getName());
        /*if(onGoingJobResponseList.get(model.getJobDetails().getGetIsImmediate()!=null&& model.getJobDetails().getGetIsImmediate().equalsIgnoreCase("1"))
        {
@@ -68,20 +70,18 @@ public class OnGoingAdapter extends RecyclerView.Adapter<OnGoingAdapter.MyViewHo
            }
        }*/
 
-        if(model.getJobDetails().getGetIsImmediate().equalsIgnoreCase("1"))
-        {
+        if (model.getJobDetails().getGetIsImmediate().equalsIgnoreCase("1")) {
             holder.binding.tvDate.setText(R.string.imediate_requirment);
             holder.binding.tvDate.setTextColor(ContextCompat.getColor(context, R.color.red));
-        }
-        else {
-            if (model.getJobDetails().getScheduleDate()!= null && !model.getJobDetails().getScheduleDate().equalsIgnoreCase("")) {
+        } else {
+            if (model.getJobDetails().getScheduleDate() != null && !model.getJobDetails().getScheduleDate().equalsIgnoreCase("")) {
                 holder.binding.tvDate.setText(model.getJobDetails().getScheduleDate());
             } else {
                 holder.binding.tvDate.setText("");
             }
         }
     }
- 
+
     @Override
     public int getItemCount() {
         return onGoingJobResponseList.size();
