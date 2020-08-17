@@ -107,17 +107,17 @@ public class ForgotPasswordFragment extends DialogFragment implements View.OnCli
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
                     if (commonResponse.getStatus() == 1) {
-                        utils.simpleAlert(getActivity(), "Success", commonResponse.getMessage());
-                    } else utils.simpleAlert(getActivity(), "Error", commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(), "Success", commonResponse.getMessage());
+                    } else utils.simpleAlert(requireActivity(), "Error", commonResponse.getMessage());
                     getDialog().dismiss();
                 }, throwable -> {
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }

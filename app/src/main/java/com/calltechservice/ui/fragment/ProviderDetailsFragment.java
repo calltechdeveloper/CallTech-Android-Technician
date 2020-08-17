@@ -73,8 +73,8 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.provider_details, container, false);
-        getActivity().setTitle("Service Provider Details");
-        ((HomeActivity) getActivity()).changeIcon(false);
+        requireActivity().setTitle("Service Provider Details");
+        ((HomeActivity) requireActivity()).changeIcon(false);
         employeeDatas=new ArrayList<>();
        // details=getArguments().getParcelable("details");
         //subCatId=getArguments().getString("sub_cat");
@@ -99,7 +99,7 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
         jsonObject.addProperty("agency_id",details.getmEmpId());
         jsonObject.addProperty("sub_cat_id",subCatId);
         jsonObject.addProperty("rquest","getAgencyEmp");
-        Call<EmployeeResponse> registrationModelCall= APIExecutor.getApiService(getActivity()).callAgencyEmployee(jsonObject);
+        Call<EmployeeResponse> registrationModelCall= APIExecutor.getApiService(requireActivity()).callAgencyEmployee(jsonObject);
         registrationModelCall.enqueue(new Callback<EmployeeResponse>() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
@@ -112,7 +112,7 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
                     }
                     else
                     {
-                        CommonUtils.showSnack(binding.getRoot(),response.body().getMessage()!=null?response.body().getMessage():getActivity().getString(R.string.server_not_responding));
+                        CommonUtils.showSnack(binding.getRoot(),response.body().getMessage()!=null?response.body().getMessage():requireActivity().getString(R.string.server_not_responding));
                     }
                 }
                 else
@@ -130,7 +130,7 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
     }
 
     private void setData() {
-        ((HomeActivity) getActivity()).changeIcon(false);
+        ((HomeActivity) requireActivity()).changeIcon(false);
 
         binding.tvUserName.setText(model.getName());
         binding.tvDetails.setText(model.getAbout());
@@ -142,7 +142,7 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
 
         if (model.getProfile_pic() != null && !model.getProfile_pic().equalsIgnoreCase("")) {
 
-            Glide.with(getActivity())
+            Glide.with(requireActivity())
                     .load(Uri.parse(model.getProfile_pic())).apply(RequestOptions.fitCenterTransform())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_user))
                     .apply(RequestOptions.errorOf(R.drawable.ic_user))
@@ -152,9 +152,9 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
         }
 
        /* binding.rvEmployeeList.setNestedScrollingEnabled(false);
-        linearLayoutManager=new LinearLayoutManager(getActivity());
+        linearLayoutManager=new LinearLayoutManager(requireActivity());
         binding.rvEmployeeList.setLayoutManager(linearLayoutManager);
-        employeListAdapter =new EmployeListAdapter(getActivity(),employeeDatas);
+        employeListAdapter =new EmployeListAdapter(requireActivity(),employeeDatas);
         binding.rvEmployeeList.setAdapter(employeListAdapter);
         binding.tvUserName.setText(details.getmName()!=null?details.getmName():"");
         binding.tvNoOfJobDone.setText(details.getmJobDone()!=null?details.getmJobDone():"");
@@ -168,7 +168,7 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
         }
         if(details.getmProfilePic()!=null&&!details.getmProfilePic().equalsIgnoreCase(""))
         {
-            Glide.with(getActivity()).load(details.getmProfilePic()).apply(new RequestOptions().placeholder(R.drawable.user)).into(binding.ivProfile);
+            Glide.with(requireActivity()).load(details.getmProfilePic()).apply(new RequestOptions().placeholder(R.drawable.user)).into(binding.ivProfile);
         }
         else
         {
@@ -195,7 +195,7 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
 
 
     private void setUpClusterer() {
-       /* mClusterManager = new ClusterManager<MyItem>(getActivity(), mMap);
+       /* mClusterManager = new ClusterManager<MyItem>(requireActivity(), mMap);
         mMap.setOnCameraIdleListener(mClusterManager);
         mMap.setOnMarkerClickListener(mClusterManager);
         addItems();

@@ -57,8 +57,8 @@ public class InvoicePriceDistribution extends BaseFragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater, R.layout.invoice_pricedistribution, container, false);
-        getActivity().setTitle("Proposal");
-        ((HomeActivity) getActivity()).changeIcon(false);
+        requireActivity().setTitle("Proposal");
+        ((HomeActivity) requireActivity()).changeIcon(false);
         return binding.getRoot();
     }
 
@@ -106,7 +106,7 @@ public class InvoicePriceDistribution extends BaseFragment implements View.OnCli
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
                     if (commonResponse.getStatus() == 1 && commonResponse.getData()!=null) {
-                        utils.simpleAlert(getActivity(),"Success",commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),"Success",commonResponse.getMessage());
 
                         binding.btSendInvoice.setVisibility(View.GONE);
 
@@ -115,18 +115,18 @@ public class InvoicePriceDistribution extends BaseFragment implements View.OnCli
 
                         // binding.btSendInvoice.setVisibility(View.GONE);
                     } else{
-                        utils.simpleAlert(getActivity(),"",commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }

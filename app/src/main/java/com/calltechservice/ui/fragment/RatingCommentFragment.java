@@ -1,6 +1,8 @@
 package com.calltechservice.ui.fragment;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import com.calltechservice.model.response.OnGoingJobResponse;
 import com.calltechservice.ui.activity.HomeActivity;
 import com.calltechservice.utils.CommonUtils;
 
-public class RatingCommentFragment extends BaseFragment implements View.OnClickListener{
+public class RatingCommentFragment extends BaseFragment implements View.OnClickListener {
 
     private FragmentRatingCommentBinding binding;
     private OnGoingJobResponse onGoingJobResponse;
@@ -23,16 +25,10 @@ public class RatingCommentFragment extends BaseFragment implements View.OnClickL
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding= DataBindingUtil.inflate(inflater, R.layout.fragment_rating_comment, container, false);
-        getActivity().setTitle("Feedback");
-        ((HomeActivity) getActivity()).changeIcon(false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rating_comment, container, false);
+        requireActivity().setTitle("Feedback");
+        ((HomeActivity) requireActivity()).changeIcon(false);
         setListener();
         setData();
         return binding.getRoot();
@@ -44,7 +40,7 @@ public class RatingCommentFragment extends BaseFragment implements View.OnClickL
         {
             if(onGoingJobResponse.getEmployee().getmProfilePic()!=null&&!onGoingJobResponse.getEmployee().getmProfilePic().equalsIgnoreCase(""))
             {
-                Glide.with(getActivity()).load(onGoingJobResponse.getEmployee().getmProfilePic()).into(binding.ivEmpProfile);
+                Glide.with(requireActivity()).load(onGoingJobResponse.getEmployee().getmProfilePic()).into(binding.ivEmpProfile);
             }
             else
             {
@@ -54,53 +50,34 @@ public class RatingCommentFragment extends BaseFragment implements View.OnClickL
         }*/
     }
 
-    private void setListener()
-    {
+    private void setListener() {
         binding.btSubmit.setOnClickListener(this);
-
     }
 
-
-    private boolean validation()
-    {
-        if(binding.ratingBar.getRating()==0)
-        {
-            CommonUtils.showSnack(binding.getRoot(),getString(R.string.rate_employee));
+    private boolean validation() {
+        if (binding.ratingBar.getRating() == 0) {
+            CommonUtils.showSnack(binding.getRoot(), getString(R.string.rate_employee));
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
-            case R.id.btSubmit:
-                if(validation())
-                {
-                    if(CommonUtils.isOnline(getActivity()))
-                    {
-                        callShareFeedBackApi();
-                    }
-                    else
-                    {
-                        CommonUtils.showSnack(binding.getRoot(),getString(R.string.internet_connection));
-
-                    }
+        if (view.getId() == R.id.btSubmit) {
+            if (validation()) {
+                if (CommonUtils.isOnline(requireActivity())) {
+                    callShareFeedBackApi();
+                } else {
+                    CommonUtils.showSnack(binding.getRoot(), getString(R.string.internet_connection));
                 }
-                break;
-            default:
-                break;
+            }
         }
     }
 
 
-
-    private void callShareFeedBackApi()
-    {
+    private void callShareFeedBackApi() {
         /*showProgressDialog();
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("provider_id",onGoingJobResponse.getEmployee().getmEmpId());
@@ -108,7 +85,7 @@ public class RatingCommentFragment extends BaseFragment implements View.OnClickL
         jsonObject.addProperty("rating", binding.ratingBar.getRating()+"");
         jsonObject.addProperty("comment", binding.etComment.getText().toString().trim());
         jsonObject.addProperty("rquest","feedback");
-        Call<CommonResponse> commonResponseCall= APIExecutor.getApiService(getActivity()).callFeedback(jsonObject);
+        Call<CommonResponse> commonResponseCall= APIExecutor.getApiService(requireActivity()).callFeedback(jsonObject);
 
         commonResponseCall.enqueue(new Callback<CommonResponse>() {
             @Override
@@ -117,11 +94,11 @@ public class RatingCommentFragment extends BaseFragment implements View.OnClickL
                 if(response.body()!=null&&response.body().getmStatus()!=null&&response.body().getmStatus().equalsIgnoreCase("1"))
                 {
                     Fragment fragment=new OnGoingFragment();
-                    CommonUtils.alertMessage(getActivity(),response.body().getmMessage()!=null?response.body().getmMessage()+"\n"+"You want to rate this again??":"",fragment);
+                    CommonUtils.alertMessage(requireActivity(),response.body().getmMessage()!=null?response.body().getmMessage()+"\n"+"You want to rate this again??":"",fragment);
                 }
                 else
                 {
-                    CommonUtils.showSnack(binding.getRoot(),getActivity().getString(R.string.server_not_responding));
+                    CommonUtils.showSnack(binding.getRoot(),requireActivity().getString(R.string.server_not_responding));
 
                 }
             }

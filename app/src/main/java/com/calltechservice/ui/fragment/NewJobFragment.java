@@ -72,7 +72,7 @@ public class NewJobFragment extends BaseFragment implements View.OnClickListener
                 CommonUtils.setFragment(fragment,true, (FragmentActivity) mContext, R.id.flContainerHome);
                 //Snackbar.make(binding.getRoot(),"Working", Snackbar.LENGTH_SHORT).show();
                /* if (validation()) {
-                    if (CommonUtils.isOnline(getActivity())) {
+                    if (CommonUtils.isOnline(requireActivity())) {
                         //callUpdateProfileApi();
                     } else {
                         Snackbar.make(binding.getRoot(), getString(R.string.internet_connection), Snackbar.LENGTH_SHORT).show();
@@ -105,11 +105,11 @@ public class NewJobFragment extends BaseFragment implements View.OnClickListener
         binding.tvTime.setOnClickListener(this);
         binding.btDone.setOnClickListener(this);
 
-        /*NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        /*NavigationView navigationView = (NavigationView) requireActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.payment_cart);*/
-        ((HomeActivity) getActivity()).changeIcon(false);
-        //getActivity().setTitle("Payment");
-        Objects.requireNonNull(getActivity()).setTitle("New job");
+        ((HomeActivity) requireActivity()).changeIcon(false);
+        //requireActivity().setTitle("Payment");
+        Objects.requireNonNull(requireActivity()).setTitle("New job");
 
         binding.cbImmediate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -155,7 +155,7 @@ public class NewJobFragment extends BaseFragment implements View.OnClickListener
                    }
                     Log.e("EMpoyeeId",empId.toString());
                     SendInvitationRequest sendInvitationRequest = new SendInvitationRequest();
-                    sendInvitationRequest.setUserId(SharedPref.getPreferencesString(getActivity(), AppConstant.USER_ID));
+                    sendInvitationRequest.setUserId(SharedPref.getPreferencesString(requireActivity(), AppConstant.USER_ID));
                     sendInvitationRequest.setDescription(scheduleBinding.etJobDetails.getText().toString().trim());
                     sendInvitationRequest.setTitle(subCatName);
                     sendInvitationRequest.setEmpIds(empId);
@@ -186,7 +186,7 @@ public class NewJobFragment extends BaseFragment implements View.OnClickListener
                 }*//*
 
                 Fragment fragment = new MyJobFragment();
-                CommonUtils.setFragment(fragment,true, (FragmentActivity) getActivity(), R.id.flContainerHome);
+                CommonUtils.setFragment(fragment,true, (FragmentActivity) requireActivity(), R.id.flContainerHome);
                 break;*/
 
                 default:

@@ -34,7 +34,7 @@ public class BaseFragment extends Fragment {
     }
 
     protected void replaceFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         fragmentTransaction.replace(R.id.frameContainer, fragment, fragment.getClass().getName()).commit();
     }

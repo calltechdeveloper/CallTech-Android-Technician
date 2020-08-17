@@ -58,17 +58,17 @@ public class PolicyFragment extends BaseFragment {
                     if (response.getStatus() == 1&&response.getData()!=null) {
                         binding.tvMessage.setText(utils.fromHtml(response.getData().getDescription()));
                     } else {
-                        utils.simpleAlert(getActivity(), "Error", response.getMessage());
+                        utils.simpleAlert(requireActivity(), "Error", response.getMessage());
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }                       });
     }
 

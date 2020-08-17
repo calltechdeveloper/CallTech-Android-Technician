@@ -44,7 +44,7 @@ public class OffersFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ((HomeActivity) Objects.requireNonNull(mContext)).changeIcon(true);
-        getActivity().setTitle("Offers");
+        requireActivity().setTitle("Offers");
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

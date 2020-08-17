@@ -24,8 +24,8 @@ public class ComingSoonFragment extends BaseFragment {
         //return inflater.inflate(R.layout.fragment_coming_soon, container, false);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coming_soon, container, false);
         //View view = binding.getRoot();
-        ((HomeActivity) getActivity()).changeIcon(false);
-        //getActivity().setTitle("Coming Soon");
+        ((HomeActivity) requireActivity()).changeIcon(false);
+        //requireActivity().setTitle("Coming Soon");
 
         return binding.getRoot();
     }

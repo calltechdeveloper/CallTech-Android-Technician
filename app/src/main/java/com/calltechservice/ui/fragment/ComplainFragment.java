@@ -39,8 +39,8 @@ public class ComplainFragment extends BaseFragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater, R.layout.complain_fragment, container, false);
-        getActivity().setTitle("Post your Complain");
-        ((HomeActivity) getActivity()).changeIcon(false);
+        requireActivity().setTitle("Post your Complain");
+        ((HomeActivity) requireActivity()).changeIcon(false);
         setListener();
         setData();
         return binding.getRoot();
@@ -82,7 +82,7 @@ public class ComplainFragment extends BaseFragment implements View.OnClickListen
             case R.id.btSubmit:
                 if(validation())
                 {
-                    if(CommonUtils.isOnline(getActivity()))
+                    if(CommonUtils.isOnline(requireActivity()))
                     {
                         callShareFeedBackApi();
                     }
@@ -108,7 +108,7 @@ public class ComplainFragment extends BaseFragment implements View.OnClickListen
         jsonObject.addProperty("comment_title", binding.etSubject.getText().toString().trim());
         jsonObject.addProperty("comment", binding.etComment.getText().toString().trim());
         jsonObject.addProperty("rquest","raiseComplaint");
-        Call<CommonResponse> commonResponseCall= APIExecutor.getApiService(getActivity()).callraiseComplaint(jsonObject);
+        Call<CommonResponse> commonResponseCall= APIExecutor.getApiService(requireActivity()).callraiseComplaint(jsonObject);
 
         commonResponseCall.enqueue(new Callback<CommonResponse>() {
             @Override
@@ -116,11 +116,11 @@ public class ComplainFragment extends BaseFragment implements View.OnClickListen
                 hideProgressDialog();
                 if(response.body()!=null&&response.body().getmStatus()!=null&&response.body().getmStatus().equalsIgnoreCase("1"))
                 {
-                    CommonUtils.commonAlertBackStack(getActivity(),response.body().getmMessage()!=null?response.body().getmMessage():"");
+                    CommonUtils.commonAlertBackStack(requireActivity(),response.body().getmMessage()!=null?response.body().getmMessage():"");
                 }
                 else
                 {
-                    CommonUtils.showSnack(binding.getRoot(),getActivity().getString(R.string.server_not_responding));
+                    CommonUtils.showSnack(binding.getRoot(),requireActivity().getString(R.string.server_not_responding));
 
                 }
             }

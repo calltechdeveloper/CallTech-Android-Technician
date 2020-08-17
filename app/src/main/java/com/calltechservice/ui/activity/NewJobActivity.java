@@ -146,7 +146,7 @@ public class NewJobActivity extends BaseActivity implements View.OnClickListener
                    }
                     Log.e("EMpoyeeId",empId.toString());
                     SendInvitationRequest sendInvitationRequest = new SendInvitationRequest();
-                    sendInvitationRequest.setUserId(SharedPref.getPreferencesString(getActivity(), AppConstant.USER_ID));
+                    sendInvitationRequest.setUserId(SharedPref.getPreferencesString(requireActivity(), AppConstant.USER_ID));
                     sendInvitationRequest.setDescription(scheduleBinding.etJobDetails.getText().toString().trim());
                     sendInvitationRequest.setTitle(subCatName);
                     sendInvitationRequest.setEmpIds(empId);
@@ -210,7 +210,7 @@ public class NewJobActivity extends BaseActivity implements View.OnClickListener
                         CommonUtils.setFragment(fragment,true, (FragmentActivity) this, R.id.flContainerHome);
 
                         //Fragment fragment = new NewJobFragment();
-                        //CommonUtils.setFragment(fragment,false, (FragmentActivity) getActivity(), R.id.flContainerHome);
+                        //CommonUtils.setFragment(fragment,false, (FragmentActivity) requireActivity(), R.id.flContainerHome);
 
                     } else{
                         utils.simpleAlert(this,this.getString(R.string.error),commonResponse.getMessage());

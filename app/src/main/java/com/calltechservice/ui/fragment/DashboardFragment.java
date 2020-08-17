@@ -55,15 +55,15 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false);
         setHasOptionsMenu(true);
-        ((HomeActivity) getActivity()).changeIcon(true);
-        Objects.requireNonNull(getActivity()).setTitle("Home");
+        ((HomeActivity) requireActivity()).changeIcon(true);
+        Objects.requireNonNull(requireActivity()).setTitle("Home");
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Objects.requireNonNull(getActivity()).setTitle("Home");
+        Objects.requireNonNull(requireActivity()).setTitle("Home");
         adapter = new DashboardAdapter(getContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         binding.recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
@@ -94,7 +94,7 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = getActivity();
+        mContext = requireActivity();
     }
 
 

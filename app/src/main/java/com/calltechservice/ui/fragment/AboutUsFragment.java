@@ -41,7 +41,7 @@ public class AboutUsFragment extends BaseFragment implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_us, container, false);
-        ((HomeActivity) getActivity()).changeIcon(false);
+        ((HomeActivity) requireActivity()).changeIcon(false);
 
         binding.fb.setOnClickListener(this);
         binding.linkedin.setOnClickListener(this);

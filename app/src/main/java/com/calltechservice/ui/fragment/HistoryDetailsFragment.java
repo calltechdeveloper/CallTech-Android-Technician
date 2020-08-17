@@ -1,30 +1,28 @@
 package com.calltechservice.ui.fragment;
 
-import android.app.Activity;
-import android.content.Context;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import com.google.android.material.navigation.NavigationView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.calltechservice.databinding.HistoryDetailsBinding;
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.calltechservice.BaseFragment;
 import com.calltechservice.R;
+import com.calltechservice.databinding.HistoryDetailsBinding;
 import com.calltechservice.model.response.OnGoingJobResponse;
 import com.calltechservice.ui.activity.HomeActivity;
 import com.calltechservice.ui.adapter.InvitedEmpolyeeListAdapter;
 import com.calltechservice.utils.CommonUtils;
 import com.calltechservice.utils.PermissionUtils;
+import com.google.android.material.navigation.NavigationView;
 
-public class HistoryDetailsFragment extends BaseFragment implements View.OnClickListener{
+public class HistoryDetailsFragment extends BaseFragment implements View.OnClickListener {
     private HistoryDetailsBinding binding;
     private LinearLayoutManager layoutManager;
     private InvitedEmpolyeeListAdapter inviteCartAdapter;
-    private Context context;
     private OnGoingJobResponse onGoingJobResponse;
 
     @Override
@@ -33,37 +31,36 @@ public class HistoryDetailsFragment extends BaseFragment implements View.OnClick
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.history_details, container, false);
         View view = binding.getRoot();
-        setRecyslerViw();
+        setRecyclerView();
         setListener();
         return view;
     }
 
-    private void setListener()
-    {
+    private void setListener() {
         //binding.tvMobileNo.setOnClickListener(this);
 
     }
-    private void setRecyslerViw()
-    {
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+
+    private void setRecyclerView() {
+        NavigationView navigationView = requireActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.invite_cart);
-        ((HomeActivity) getActivity()).changeIcon(false);
-        getActivity().setTitle("Completed");
+        ((HomeActivity) requireActivity()).changeIcon(false);
+        requireActivity().setTitle("Completed");
 
        /* onGoingJobResponse=getArguments().getParcelable("details");
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) requireActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.invite_cart);
-        ((HomeActivity) getActivity()).changeIcon(false);
-        getActivity().setTitle("Jobs");
+        ((HomeActivity) requireActivity()).changeIcon(false);
+        requireActivity().setTitle("Jobs");
         binding.tvTitle.setText(onGoingJobResponse.getTitle()!=null?onGoingJobResponse.getTitle():"");
         binding.tvComment.setText(onGoingJobResponse.getComment()!=null?onGoingJobResponse.getComment():"");
         binding.tvDescription.setText(onGoingJobResponse.getDescription()!=null?onGoingJobResponse.getDescription():"");
-        layoutManager=new LinearLayoutManager(getActivity());
-        binding.tvScheduleDate.setText(getActivity().getString(R.string.job_completed)+" "+onGoingJobResponse.getScheduleDate());
+        layoutManager=new LinearLayoutManager(requireActivity());
+        binding.tvScheduleDate.setText(requireActivity().getString(R.string.job_completed)+" "+onGoingJobResponse.getScheduleDate());
         if(onGoingJobResponse.getRating()!=null&&!onGoingJobResponse.getRating().equalsIgnoreCase(""))
         {
             binding.ratingBar.setRating(Float.valueOf(onGoingJobResponse.getRating()));
@@ -105,26 +102,17 @@ public class HistoryDetailsFragment extends BaseFragment implements View.OnClick
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context=context;
-    }
-
-    @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
-            case R.id.tvMobileNo:
-                if (PermissionUtils.checkPermissionCall(getActivity())) {
-                    CommonUtils.call(getActivity(),binding.tvMobileNo.getText().toString().trim());
+        if (view.getId() == R.id.tvMobileNo) {
+            if (PermissionUtils.checkPermissionCall(requireActivity())) {
+                String phone = binding.tvMobileNo.getText().toString().trim();
+                if (phone != null && !phone.startsWith("0")) {
+                    phone = "0" + phone;
                 }
-                else
-                {
-                    PermissionUtils.requestPermissionCall((Activity) getActivity());
-                }
-                break;
-            default:
-                break;
+                CommonUtils.call(requireActivity(), phone);
+            } else {
+                PermissionUtils.requestPermissionCall(requireActivity());
+            }
         }
     }
 }

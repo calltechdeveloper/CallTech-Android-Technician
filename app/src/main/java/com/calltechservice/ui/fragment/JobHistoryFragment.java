@@ -46,17 +46,17 @@ public class JobHistoryFragment extends BaseFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_on_going, container, false);
         View view = binding.getRoot();
 
-       // getActivity().setTitle("Completed");
+       // requireActivity().setTitle("Completed");
         setRecyslerViw();
 
         callCompletejobListAPI();
-        /*if(CommonUtils.isOnline(getActivity()))
+        /*if(CommonUtils.isOnline(requireActivity()))
         {
             //callJobHistoryApi();
         }
         else
         {
-            CommonUtils.showSnack(getActivity().findViewById(android.R.id.content),getActivity().getString(R.string.internet_connection));
+            CommonUtils.showSnack(requireActivity().findViewById(android.R.id.content),requireActivity().getString(R.string.internet_connection));
 
         }*/
 
@@ -66,12 +66,12 @@ public class JobHistoryFragment extends BaseFragment {
     private void setRecyslerViw()
     {
         onGoingJobResponses=new ArrayList<>();
-        layoutManager=new LinearLayoutManager(getActivity());
+        layoutManager=new LinearLayoutManager(requireActivity());
         binding.rvOngoing.setLayoutManager(layoutManager);
         onGoingAdapter =new CompleteJobAdapter(context,onGoingJobResponses);
         onGoingAdapter.setHasStableIds(true);
         binding.rvOngoing.setAdapter(onGoingAdapter);
-        binding.rvOngoing.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+        binding.rvOngoing.addOnItemTouchListener(new RecyclerItemClickListener(requireActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         Fragment fragment=new OnGoingDetailsFragment();
@@ -80,14 +80,14 @@ public class JobHistoryFragment extends BaseFragment {
                         bundle.putString("jobId", onGoingJobResponses.get(position).getJobDetails().getJobId());
                         bundle.putString("userId", onGoingJobResponses.get(position).getJobDetails().getUserId());
                         fragment.setArguments(bundle);
-                        CommonUtils.setFragment(fragment,false,  getActivity(), R.id.flContainerHome);
+                        CommonUtils.setFragment(fragment,false,  requireActivity(), R.id.flContainerHome);
 
 
                        /* Fragment fragment=new HistoryDetailsFragment();
                         Bundle bundle=new Bundle();
                         bundle.putParcelable("details",onGoingJobResponses.get(position));
                         fragment.setArguments(bundle);
-                        CommonUtils.setFragment(fragment,false,  getActivity(), R.id.flContainerHome);*/
+                        CommonUtils.setFragment(fragment,false,  requireActivity(), R.id.flContainerHome);*/
                     }
                 })
         );
@@ -124,18 +124,18 @@ public class JobHistoryFragment extends BaseFragment {
                         onGoingJobResponses.addAll(commonResponse.getData());
                         onGoingAdapter.notifyDataSetChanged();
                     } else{
-                        //utils.simpleAlert(getActivity(),"",commonResponse.getMessage());
+                        //utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }
@@ -145,9 +145,9 @@ public class JobHistoryFragment extends BaseFragment {
     {
        /* showProgressDialog();
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("user_id", SharedPref.getPreferencesString(getActivity(), AppConstant.USER_ID));
+        jsonObject.addProperty("user_id", SharedPref.getPreferencesString(requireActivity(), AppConstant.USER_ID));
         jsonObject.addProperty("rquest","jobHistory");
-        Call<CommonResponse<OnGoingJobResponse>> commonResponseCall= APIExecutor.getApiService(getActivity()).callJobHistory(jsonObject);
+        Call<CommonResponse<OnGoingJobResponse>> commonResponseCall= APIExecutor.getApiService(requireActivity()).callJobHistory(jsonObject);
         commonResponseCall.enqueue(new Callback<CommonResponse<OnGoingJobResponse>>() {
             @Override
             public void onResponse(Call<CommonResponse<OnGoingJobResponse>> call, Response<CommonResponse<OnGoingJobResponse>> response) {

@@ -71,7 +71,7 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_account, container, false);
         View view = binding.getRoot();
         setHasOptionsMenu(true);
-        ((HomeActivity) getActivity()).changeIcon(true);
+        ((HomeActivity) requireActivity()).changeIcon(true);
         lickListener();
         getProfile();
         return view;
@@ -79,18 +79,18 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
 
     private void setData() {
 
-        if (SharedPref.getPreferencesString(getActivity(), AppConstant.NAME) != null) {
-            binding.etName.getEditText().setText(SharedPref.getPreferencesString(getActivity(), AppConstant.NAME));
+        if (SharedPref.getPreferencesString(requireActivity(), AppConstant.NAME) != null) {
+            binding.etName.getEditText().setText(SharedPref.getPreferencesString(requireActivity(), AppConstant.NAME));
         }
-        if (SharedPref.getPreferencesString(getActivity(), AppConstant.EMAIL) != null) {
-            binding.etEmail.getEditText().setText(SharedPref.getPreferencesString(getActivity(), AppConstant.EMAIL));
+        if (SharedPref.getPreferencesString(requireActivity(), AppConstant.EMAIL) != null) {
+            binding.etEmail.getEditText().setText(SharedPref.getPreferencesString(requireActivity(), AppConstant.EMAIL));
         }
-        if (SharedPref.getPreferencesString(getActivity(), AppConstant.MOBILE_NO) != null) {
-            binding.etPhoneNo.getEditText().setText(SharedPref.getPreferencesString(getActivity(), AppConstant.MOBILE_NO));
+        if (SharedPref.getPreferencesString(requireActivity(), AppConstant.MOBILE_NO) != null) {
+            binding.etPhoneNo.getEditText().setText(SharedPref.getPreferencesString(requireActivity(), AppConstant.MOBILE_NO));
         }
 
-        if (SharedPref.getPreferencesString(getActivity(), AppConstant.PROFILE_PIC) != null && !SharedPref.getPreferencesString(getActivity(), AppConstant.PROFILE_PIC).equalsIgnoreCase("")) {
-            Glide.with(getActivity()).load(SharedPref.getPreferencesString(getActivity(), AppConstant.PROFILE_PIC)).apply(new RequestOptions().placeholder(R.drawable.user).dontAnimate()).into(binding.ivProfile);
+        if (SharedPref.getPreferencesString(requireActivity(), AppConstant.PROFILE_PIC) != null && !SharedPref.getPreferencesString(requireActivity(), AppConstant.PROFILE_PIC).equalsIgnoreCase("")) {
+            Glide.with(requireActivity()).load(SharedPref.getPreferencesString(requireActivity(), AppConstant.PROFILE_PIC)).apply(new RequestOptions().placeholder(R.drawable.user).dontAnimate()).into(binding.ivProfile);
 
         } else {
             binding.ivProfile.setImageResource(R.drawable.user);
@@ -106,13 +106,13 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
 
         if (model.getImage() != null && !model.getImage().equalsIgnoreCase("")) {
 
-            Glide.with(getActivity())
+            Glide.with(requireActivity())
                     .load(Uri.parse(model.getImage()))
                     .apply(RequestOptions.placeholderOf(R.drawable.user))
                     .apply(RequestOptions.errorOf(R.drawable.user))
                     .into(binding.ivProfile);
 
-            //Glide.with(getActivity()).load(Uri.parse(model.getUserImage())).apply(new RequestOptions().placeholder(R.drawable.user).dontAnimate()).into(binding.ivProfile);
+            //Glide.with(requireActivity()).load(Uri.parse(model.getUserImage())).apply(new RequestOptions().placeholder(R.drawable.user).dontAnimate()).into(binding.ivProfile);
 
         }else {
             binding.ivProfile.setImageResource(R.drawable.user);
@@ -121,11 +121,11 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
 
     public void lickListener() {
         binding.btSubmit.setOnClickListener(this);
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) requireActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.account);
-        ((HomeActivity) getActivity()).changeIcon(true);
+        ((HomeActivity) requireActivity()).changeIcon(true);
         binding.ivProfile.setOnClickListener(this);
-        getActivity().setTitle("My Account");
+        requireActivity().setTitle("My Account");
 
     }
 
@@ -151,7 +151,7 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
                 return true;
             case R.id.action_save:
                 if (validation()) {
-                    if (CommonUtils.isOnline(getActivity())) {
+                    if (CommonUtils.isOnline(requireActivity())) {
                         updateProfile();
                     } else {
                         Snackbar.make(binding.getRoot(), getString(R.string.internet_connection), Snackbar.LENGTH_SHORT).show();
@@ -165,13 +165,13 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
 
     private boolean validation() {
         if (TextUtils.isEmpty(binding.etName.getEditText().getText().toString().trim())) {
-            CommonUtils.showSnack(getActivity().findViewById(android.R.id.content), getContext().getString(R.string.please_enter_name));
+            CommonUtils.showSnack(requireActivity().findViewById(android.R.id.content), getContext().getString(R.string.please_enter_name));
             return false;
         } else if (TextUtils.isEmpty(binding.etEmail.getEditText().getText().toString().trim())) {
-            CommonUtils.showSnack(getActivity().findViewById(android.R.id.content), getContext().getString(R.string.please_enter_email));
+            CommonUtils.showSnack(requireActivity().findViewById(android.R.id.content), getContext().getString(R.string.please_enter_email));
             return false;
         } else if (CommonUtils.isValidEmail(binding.etEmail.getEditText().getText().toString().trim())) {
-            CommonUtils.showSnack(getActivity().findViewById(android.R.id.content), getContext().getString(R.string.please_enter_valid_email));
+            CommonUtils.showSnack(requireActivity().findViewById(android.R.id.content), getContext().getString(R.string.please_enter_valid_email));
             return false;
         } else {
             return true;
@@ -186,9 +186,9 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
         binding.etAddress.setEnabled(value);
         binding.etState.setEnabled(value);
         if (value) {
-            getActivity().setTitle("Edit Account");
+            requireActivity().setTitle("Edit Account");
         } else {
-            getActivity().setTitle("My Account");
+            requireActivity().setTitle("My Account");
         }
 
     }
@@ -211,14 +211,14 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
 
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose From Gallery", "Cancel"};
-        PackageManager pm = getActivity().getPackageManager();
+        PackageManager pm = requireActivity().getPackageManager();
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AlertDialogTheme);
         builder.setTitle("Select Option");
         builder.setItems(options, (dialog, item) -> {
             if (options[item].equals("Take Photo")) {
                 dialog.dismiss();
-                int cameraPermission = pm.checkPermission(Manifest.permission.CAMERA, getActivity().getPackageName());
-                int storagePermission = pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, getActivity().getPackageName());
+                int cameraPermission = pm.checkPermission(Manifest.permission.CAMERA, requireActivity().getPackageName());
+                int storagePermission = pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity().getPackageName());
                 if (cameraPermission == PackageManager.PERMISSION_GRANTED && storagePermission == PackageManager.PERMISSION_GRANTED) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     this.startActivityForResult(intent, PICK_IMAGE_CAMERA);
@@ -227,7 +227,7 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
                 }
             } else if (options[item].equals("Choose From Gallery")) {
                 dialog.dismiss();
-                int hasPerm = pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, getActivity().getPackageName());
+                int hasPerm = pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity().getPackageName());
                 if (hasPerm == PackageManager.PERMISSION_GRANTED) {
                     Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     this.startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
@@ -339,7 +339,7 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
         builder.setNegativeButton("NO", null);
         builder.setPositiveButton("YES", (dialogInterface, i) -> {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+            Uri uri = Uri.fromParts("package", requireActivity().getPackageName(), null);
             intent.setData(uri);
             startActivityForResult(intent, 1);
         });
@@ -369,11 +369,11 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }                    });
     }
 
@@ -399,11 +399,11 @@ public class MyAccountFragment extends BaseFragment implements View.OnClickListe
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }});
     }
 

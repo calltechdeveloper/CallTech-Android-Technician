@@ -65,14 +65,14 @@ public class ServiceProviderDashboardFragment extends BaseFragment implements Vi
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_service_provider_dashboard, container, false);
         setHasOptionsMenu(true);
 
-        ((HomeActivity) getActivity()).changeIcon(true);
+        ((HomeActivity) requireActivity()).changeIcon(true);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Objects.requireNonNull(getActivity()).setTitle("Home");
+        Objects.requireNonNull(requireActivity()).setTitle("Home");
         setDashboardLyt();
         deviceToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("firebasedevice",deviceToken);
@@ -92,7 +92,7 @@ public class ServiceProviderDashboardFragment extends BaseFragment implements Vi
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = getActivity();
+        mContext = requireActivity();
     }
 
 

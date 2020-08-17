@@ -37,7 +37,7 @@ public class Termsprivacy extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.termprivacy, container, false);
-        ((HomeActivity) getActivity()).changeIcon(false);
+        ((HomeActivity) requireActivity()).changeIcon(false);
         return binding.getRoot();
 
 

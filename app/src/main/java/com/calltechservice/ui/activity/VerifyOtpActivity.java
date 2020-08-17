@@ -134,12 +134,12 @@ if(validation()) {
             public void onTick(long millisUntilFinished) {
                 binding.tvTimer.setText(getString(R.string.__00)+millisUntilFinished / 1000);
                 binding.tvResend.setEnabled(false);
-                //binding.tvResend.setTextColor(ContextCompat.getColor(getActivity(),R.color.app_bg));
+                //binding.tvResend.setTextColor(ContextCompat.getColor(requireActivity(),R.color.app_bg));
             }
 
             public void onFinish() {
                 binding.tvTimer.setText(R.string._00_);
-               // binding.tvResend.setEnabled(true);binding.tvResend.setTextColor(ContextCompat.getColor(getActivity(),R.color.colorPrimary));
+               // binding.tvResend.setEnabled(true);binding.tvResend.setTextColor(ContextCompat.getColor(requireActivity(),R.color.colorPrimary));
 
             }
         }.start();*/

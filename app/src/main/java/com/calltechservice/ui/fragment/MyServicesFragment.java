@@ -53,7 +53,7 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
 
         setHasOptionsMenu(true);
 
-        ((HomeActivity) getActivity()).changeIcon(true);
+        ((HomeActivity) requireActivity()).changeIcon(true);
         return binding.getRoot();
     }
 
@@ -163,7 +163,7 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = getActivity();
+        mContext = requireActivity();
     }
 
 
@@ -184,18 +184,18 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
                         finalCategory.addAll(commonResponse.getData());
                         adapter.notifyDataSetChanged();
                     } else{
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }
@@ -219,7 +219,7 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
                         finalCategory.addAll(commonResponse.getData());
                         adapter.notifyDataSetChanged();
                     } else{
-                        utils.simpleAlert(getActivity(),"",commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
                         adapter.notifyDataSetChanged();
                         hideProgressDialog();
                     }
@@ -227,18 +227,18 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }
 
 
     private void logoutAlert(String serviceid) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.AlertDialogTheme);
         builder.setTitle("Delete Service");
         builder.setMessage("Do you want to Delete?");
         builder.setPositiveButton("Yes", (dialogInterface, i) -> {

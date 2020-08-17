@@ -64,10 +64,10 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
         binding.ivAccept.setOnClickListener(this);
         binding.ivDecline.setOnClickListener(this);
         binding.infopayment.setOnClickListener(this);
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) requireActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.invite_cart);
-        ((HomeActivity) getActivity()).changeIcon(false);
-        getActivity().setTitle("Invitations Details");
+        ((HomeActivity) requireActivity()).changeIcon(false);
+        requireActivity().setTitle("Invitations Details");
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -220,8 +220,8 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
 
 
 //    private void sendInvoice() {
-//        final ReciptDetailsBinding bindingReceipt=DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.recipt_details, null, false);
-//        final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Translucent_NoTitleBar);
+//        final ReciptDetailsBinding bindingReceipt=DataBindingUtil.inflate(LayoutInflater.from(requireActivity()), R.layout.recipt_details, null, false);
+//        final Dialog dialog = new Dialog(requireActivity(), android.R.style.Theme_Translucent_NoTitleBar);
 //        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        dialog.setCancelable(true);
 //        dialog.setContentView(bindingReceipt.getRoot());
@@ -237,7 +237,7 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
 //            @Override
 //            public void onClick(View view) {
 //
-//                if(CommonUtils.isOnline(getActivity()))
+//                if(CommonUtils.isOnline(requireActivity()))
 //                {
 //
 //                    if(!TextUtils.isEmpty(bindingReceipt.etAmount.getText().toString().trim()))
@@ -285,7 +285,7 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
                 bundle1.putString("providerid",mInvitations.getJobDetails().getProvider_id());
                 bundle1.putString("kmcharges",mInvitations.getKmcharges());
                 fragment.setArguments(bundle1);
-                CommonUtils.setFragment(fragment,false,  getActivity(), R.id.flContainerHome);
+                CommonUtils.setFragment(fragment,false,  requireActivity(), R.id.flContainerHome);
                 break;
 
 
@@ -302,7 +302,7 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
                 bundle2.putString("providerid",mInvitations.getJobDetails().getProvider_id());
                 bundle2.putString("kmcharges",mInvitations.getKmcharges());
                 fragment2.setArguments(bundle2);
-                CommonUtils.setFragment(fragment2,false,  getActivity(), R.id.flContainerHome);
+                CommonUtils.setFragment(fragment2,false,  requireActivity(), R.id.flContainerHome);
 
                 break;
 
@@ -329,11 +329,11 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
                     if (commonResponse.getStatus() == 1 && commonResponse.getData()!=null) {
-                        utils.simpleAlert(getActivity(),"Success",commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),"Success",commonResponse.getMessage());
                         mInvitations = commonResponse.getData();
 
 
-                        getActivity().runOnUiThread(new Runnable() {
+                        requireActivity().runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
@@ -346,18 +346,18 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
 
                        // binding.btSendInvoice.setVisibility(View.GONE);
                     } else{
-                        utils.simpleAlert(getActivity(),"",commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }
@@ -394,18 +394,18 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
                             getFragmentManager().popBackStack();
                         }
                     } else{
-                        utils.simpleAlert(getActivity(),"",commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }
@@ -428,18 +428,18 @@ public class InvatationDetailsFragment extends BaseFragment implements View.OnCl
                         setDataViw();
 
                     } else{
-                        utils.simpleAlert(getActivity(),"",commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }

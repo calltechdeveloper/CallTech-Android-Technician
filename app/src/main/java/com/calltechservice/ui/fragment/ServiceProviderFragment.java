@@ -109,8 +109,8 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
             subCatId = getArguments().getString("sub_cat");
             subCatName = getArguments().getString("sub_cat_name");
         }*/
-        if (SharedPref.getPreferencesLat(getActivity(), AppConstant.LAT) != 0 && SharedPref.getPreferencesLong(getActivity(), AppConstant.LONG) != 0) {
-            selectedLatLang = new LatLng(SharedPref.getPreferencesLat(getActivity(), AppConstant.LAT), SharedPref.getPreferencesLong(getActivity(), AppConstant.LONG));
+        if (SharedPref.getPreferencesLat(requireActivity(), AppConstant.LAT) != 0 && SharedPref.getPreferencesLong(requireActivity(), AppConstant.LONG) != 0) {
+            selectedLatLang = new LatLng(SharedPref.getPreferencesLat(requireActivity(), AppConstant.LAT), SharedPref.getPreferencesLong(requireActivity(), AppConstant.LONG));
 
             if (selectedLatLang!=null){
                 callServicesProviderAPI(serviceSubCtegoryModel.getService_id(),String.valueOf(selectedLatLang.latitude),String.valueOf(selectedLatLang.longitude) );
@@ -123,8 +123,8 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
     }
 
     private void setListener() {
-        ((HomeActivity) getActivity()).changeIcon(false);
-        if (PermissionUtils.checkPermissionLocation(getActivity())) {
+        ((HomeActivity) requireActivity()).changeIcon(false);
+        if (PermissionUtils.checkPermissionLocation(requireActivity())) {
             locationTracker = new LocationTracker(getContext(), new LocationResult() {
                 @Override
                 public void gotLocation(Location location) {
@@ -135,7 +135,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
             locationTracker.updateLocation();
 
         } else {
-            PermissionUtils.requestPermissionLocation(getActivity());
+            PermissionUtils.requestPermissionLocation(requireActivity());
 
         }
 
@@ -144,13 +144,13 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
     private void setRecyclerView() {
         employeeDatas = new ArrayList<>();
         binding.fabFilerList.setOnClickListener(this);
-        getActivity().setTitle("Service Providers");
-        layoutManager = new LinearLayoutManager(getActivity());
+        requireActivity().setTitle("Service Providers");
+        layoutManager = new LinearLayoutManager(requireActivity());
         binding.rvServiceCategory.setLayoutManager(layoutManager);
-        serviceProviderAdapter = new ServiceProviderAdapter(getActivity(), serviceProdersModels);
-        //serviceProviderAdapter = new ServiceProviderAdapter(getActivity(), employeeDatas, subCatId);
+        serviceProviderAdapter = new ServiceProviderAdapter(requireActivity(), serviceProdersModels);
+        //serviceProviderAdapter = new ServiceProviderAdapter(requireActivity(), employeeDatas, subCatId);
         binding.rvServiceCategory.setAdapter(serviceProviderAdapter);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.category, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireActivity(), R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spProvider.setAdapter(adapter);
        /* serviceProviderAdapter.setListener(this);*/
@@ -240,8 +240,8 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
     }
 
     private void scheduleJob() {
-        scheduleBinding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.schedule, null, false);
-        dialogScheduleJob = new Dialog(getActivity(), android.R.style.Theme_Translucent_NoTitleBar);
+        scheduleBinding = DataBindingUtil.inflate(LayoutInflater.from(requireActivity()), R.layout.schedule, null, false);
+        dialogScheduleJob = new Dialog(requireActivity(), android.R.style.Theme_Translucent_NoTitleBar);
         dialogScheduleJob.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogScheduleJob.setCancelable(true);
         dialogScheduleJob.setContentView(scheduleBinding.getRoot());
@@ -269,8 +269,8 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
 
 
     private void askLocationForService() {
-        bindingDialog = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.ask_for_location, null, false);
-        final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Translucent_NoTitleBar);
+        bindingDialog = DataBindingUtil.inflate(LayoutInflater.from(requireActivity()), R.layout.ask_for_location, null, false);
+        final Dialog dialog = new Dialog(requireActivity(), android.R.style.Theme_Translucent_NoTitleBar);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(bindingDialog.getRoot());
@@ -297,11 +297,11 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
             public void onClick(View view) {
                 try {
                     if (!bindingDialog.cbCurrentLocation.isChecked()) {
-                      /*  Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(getActivity());
+                      /*  Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(requireActivity());
                         startActivityForResult(intent, PLACE_PICKER_REQUEST);
 */
                         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                        startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                        startActivityForResult(builder.build(requireActivity()), PLACE_PICKER_REQUEST);
                     } else {
                         CommonUtils.showSnack(view, getString(R.string.use_can_use_one));
 
@@ -315,7 +315,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
             }
         });
         if (currentLocation == null) {
-            Toast.makeText(getActivity(), "Please wait", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Please wait", Toast.LENGTH_SHORT).show();
         }
         dialog.show();
         bindingDialog.btOk.setOnClickListener(new View.OnClickListener() {
@@ -346,7 +346,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
     }
 
     private void callgetEmployee() {
-        if (CommonUtils.isOnline(getActivity())) {
+        if (CommonUtils.isOnline(requireActivity())) {
            // callgetEmployeeApi();
         } else {
             CommonUtils.showSnack(binding.getRoot(), getString(R.string.internet_connection));
@@ -439,7 +439,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
                    }
                     Log.e("EMpoyeeId",empId.toString());
                     SendInvitationRequest sendInvitationRequest = new SendInvitationRequest();
-                    sendInvitationRequest.setUserId(SharedPref.getPreferencesString(getActivity(), AppConstant.USER_ID));
+                    sendInvitationRequest.setUserId(SharedPref.getPreferencesString(requireActivity(), AppConstant.USER_ID));
                     sendInvitationRequest.setDescription(scheduleBinding.etJobDetails.getText().toString().trim());
                     sendInvitationRequest.setTitle(subCatName);
                     sendInvitationRequest.setEmpIds(empId);
@@ -501,7 +501,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
         jsonObject.addProperty("employee_type", binding.spProvider.getSelectedItemPosition());
         jsonObject.addProperty("sub_cat_id", subCatId);
         jsonObject.addProperty("rquest","getServiceProvider");
-        Call<EmployeeResponse> employeeResponseCall = APIExecutor.getApiService(getActivity()).callEmployee(jsonObject);
+        Call<EmployeeResponse> employeeResponseCall = APIExecutor.getApiService(requireActivity()).callEmployee(jsonObject);
         employeeResponseCall.enqueue(new Callback<EmployeeResponse>() {
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
@@ -542,7 +542,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
             dialogScheduleJob.dismiss();
         }
         showProgressDialog();
-        Call<InvitationsResponse> registrationModelCall = APIExecutor.getApiService(getActivity()).callSendInvitations(sendInvitationRequest);
+        Call<InvitationsResponse> registrationModelCall = APIExecutor.getApiService(requireActivity()).callSendInvitations(sendInvitationRequest);
         registrationModelCall.enqueue(new Callback<InvitationsResponse>() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
@@ -551,7 +551,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
                 if (response != null && response.body() != null && response.body().getStatus() != null && response.body().getStatus().equalsIgnoreCase("1")) {
 
                     Fragment fragment = new MyJobFragment();
-                    CommonUtils.commonAlert(getActivity(), response.body().getMessage(), fragment);
+                    CommonUtils.commonAlert(requireActivity(), response.body().getMessage(), fragment);
                 } else {
                     CommonUtils.showSnack(scheduleBinding.getRoot(), getString(R.string.server_not_responding));
                 }
@@ -580,28 +580,28 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
                     if (commonResponse.getStatus() == 1&&commonResponse.getData()!=null) {
 
                         Fragment fragment = new MyJobFragment();
-                        CommonUtils.commonAlert(getActivity(), commonResponse.getMessage(), fragment);
+                        CommonUtils.commonAlert(requireActivity(), commonResponse.getMessage(), fragment);
 
                         if (dialogScheduleJob != null) {
                             dialogScheduleJob.dismiss();
                         }
 
                         //Fragment fragment = new NewJobFragment();
-                        //CommonUtils.setFragment(fragment,false, (FragmentActivity) getActivity(), R.id.flContainerHome);
+                        //CommonUtils.setFragment(fragment,false, (FragmentActivity) requireActivity(), R.id.flContainerHome);
 
                     } else{
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }
@@ -626,18 +626,18 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
                         serviceProdersModels.addAll(commonResponse.getData());
                         serviceProviderAdapter.notifyDataSetChanged();
                     } else{
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),commonResponse.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
                     if(throwable instanceof ConnectException)
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),getActivity().getString(R.string.check_network_connection));
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
                     }
                     else
                     {
-                        utils.simpleAlert(getActivity(),getActivity().getString(R.string.error),throwable.getMessage());
+                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
                     }
                 });
     }
@@ -646,7 +646,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = getActivity();
+        mContext = requireActivity();
     }
 
 }

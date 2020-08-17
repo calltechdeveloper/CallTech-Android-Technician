@@ -46,10 +46,10 @@ public class MyJobFragment extends BaseFragment /*implements ViewPager.OnPageCha
     }
 
     private void setHeder() {
-        navigationView =  getActivity().findViewById(R.id.nav_view);
+        navigationView =  requireActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.invite_cart);
-        ((HomeActivity) getActivity()).changeIcon(true);
-        getActivity().setTitle("Jobs");
+        ((HomeActivity) requireActivity()).changeIcon(true);
+        requireActivity().setTitle("Jobs");
     }
 
     @Override
@@ -66,8 +66,8 @@ public class MyJobFragment extends BaseFragment /*implements ViewPager.OnPageCha
         binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                ((HomeActivity) getActivity()).changeIcon(true);
-                getActivity().setTitle("Jobs");
+                ((HomeActivity) requireActivity()).changeIcon(true);
+                requireActivity().setTitle("Jobs");
                /* switch (tab.getPosition())
                 {
                     case 0:
