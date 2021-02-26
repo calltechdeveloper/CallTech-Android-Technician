@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,7 +16,6 @@
         <item name="ratingBarStyle">@style/MyRatingBar</item>
         <item name="actionMenuTextColor">@color/color_white</item>
     </style>
-
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
         <item name="android:textColorSecondary">@android:color/black</item>
@@ -48,7 +47,6 @@
         <item name="android:textSize">15sp</item>
         <item name="android:background">@drawable/bg_dialog</item>
         <item name="android:padding">@dimen/sp_12</item>
-
     </style>
 
     <style name="ButtonRoundStyle" parent="Base.Widget.AppCompat.Button">
@@ -98,7 +96,6 @@
         <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
     </style>
 
-
     <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
@@ -108,7 +105,6 @@
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
-
 
     <style name="EditTextStyle" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textColor">@android:color/black</item>
@@ -131,7 +127,6 @@
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
-
 
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up</item>
@@ -159,13 +154,10 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
-
     <style name="SwitchCompatStyle" >
         <item name="android:thumb">@color/colorPrimaryDark</item>
         <item name="trackTint">@color/color_btn_bg</item>
     </style>
-
-
 
     <style name="searchColor">
         <item name="android:textColorHint">@android:color/white</item>
@@ -173,14 +165,16 @@
         <!-- your other custom widget styles -->
     </style>
 
-
-
     <style name="SpinnerThemeLight" >
         <item name="android:colorBackground">@color/color_white</item>
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="android:textColorSecondary">@color/color_white</item>
         <item name="android:textColorTertiary">@color/color_white</item>
         <item name="android:textColorPrimaryDisableOnly">@color/color_white</item>
+    </style>
+
+    <style name="SimpleBreakStrategy">
+        <item name="android:breakStrategy" tools:targetApi="m">simple</item>
     </style>
 
 </resources>

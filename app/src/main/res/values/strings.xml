@@ -65,7 +65,7 @@
     <string name="_00_00">00:00</string>
     <string name="enter_name">Enter name</string>
     <string name="enter_email">Enter email id</string>
-    <string name="Submit">Submit</string>
+    <string name="submit">Submit</string>
     <string name="enter_phone_no">Enter Phone No.</string>
     <string name="enter_valid_phone_no">Please enter valid phone no.</string>
     <string name="enter_otp_no">Please enter Otp no.</string>
@@ -242,5 +242,10 @@
     <string name="start_now">Start Now</string>
     <string name="task_started">Task Started</string>
     <string name="booking_confirmed">Booking Confirmed</string>
+    <string name="documents">Documents</string>
+    <string name="select_files_to_upload">Select files to upload. Files can be PNG, JPG or PDF</string>
+    <string name="upload_cv">Select CV</string>
+    <string name="select_police_clearance">Select police clearance</string>
+    <string name="select_drivers_licence">Select drivers licence</string>
 
 </resources>

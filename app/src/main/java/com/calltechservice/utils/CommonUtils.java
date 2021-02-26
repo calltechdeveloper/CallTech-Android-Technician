@@ -93,7 +93,10 @@ public class CommonUtils {
     public static void hideSoftKeyboard(Activity activity) {
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+            View currentFocus = activity.getCurrentFocus();
+            if (currentFocus != null) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+            }
         } catch (Throwable e) {
             e.printStackTrace();
         }

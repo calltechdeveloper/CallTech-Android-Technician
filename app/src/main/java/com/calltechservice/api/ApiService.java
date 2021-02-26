@@ -54,7 +54,7 @@ public interface ApiService {
     Call<InvitCartResponse> callInvitCart(@Body JsonObject JsonObject);
 
     @POST("~anshul/fixer/api/customer/customer_api.php/")
-    Call<CommonResponse> callraiseComplaint(@Body JsonObject JsonObject);
+    Call<CommonResponse> callRaiseComplaint(@Body JsonObject JsonObject);
 
     @POST("~anshul/fixer/api/customer/customer_api.php/")
     Call<CommonResponse> callAwardJob(@Body JsonObject JsonObject);
@@ -205,4 +205,24 @@ public interface ApiService {
 
     @GET("getcountry")
     Observable<CommonDataResponse<List<CountryModel>>> callCountryAPI();
+
+    @FormUrlEncoded
+    @POST("upload_individual_docs")
+    Observable<CommonDataResponse<String>> uploadIndividualDocs(@Field("service_provider_id") String service_provider_id,
+                                                                          @Field("cv") String cv,
+                                                                          @Field("cv_type") String cvType,
+                                                                          @Field("police_clearance") String policeClearance,
+                                                                          @Field("police_clearance_type") String policeClearanceType,
+                                                                   @Field("drivers_licence") String driversLicence,
+                                                                   @Field("drivers_licence_type") String driversLicenceType);
+
+    @FormUrlEncoded
+    @POST("upload_company_docs")
+    Observable<CommonDataResponse<String>> uploadCompanyDocs(@Field("service_provider_id") String service_provider_id,
+                                                             @Field("company_reg_doc") String companyRegistrationDocument,
+                                                             @Field("company_reg_doc_type") String companyRegistrationDocumentType,
+                                                             @Field("tax_clearance") String taxClearance,
+                                                             @Field("tax_clearance_type") String taxClearanceType,
+                                                             @Field("bee_certificate") String beeCertificate,
+                                                             @Field("bee_certificate_type") String beeCertificateType);
 }

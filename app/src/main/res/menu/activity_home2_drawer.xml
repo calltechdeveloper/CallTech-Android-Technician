@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/user_home"
@@ -13,7 +12,12 @@
             android:icon="@drawable/mic_account"
             android:title="@string/my_account" />
 
-       <item
+        <item
+            android:id="@+id/documents"
+            android:icon="@drawable/doc_solid"
+            android:title="@string/documents" />
+
+        <item
             android:id="@+id/my_services"
             android:icon="@drawable/ic_myservices"
             android:title="@string/my_service" />
@@ -28,27 +32,26 @@
             android:icon="@drawable/ic_pay"
             android:title="@string/pay" />
 -->
-       <!-- <item
-            android:id="@+id/offers"
-            android:icon="@drawable/ic_offers"
-            android:title="@string/offers" />-->
+        <!-- <item
+             android:id="@+id/offers"
+             android:icon="@drawable/ic_offers"
+             android:title="@string/offers" />-->
 
 
-    <!--    <item
-            android:id="@+id/share"
-            android:icon="@drawable/ic_referral"
-            android:title="@string/share" />-->
+        <!--    <item
+                android:id="@+id/share"
+                android:icon="@drawable/ic_referral"
+                android:title="@string/share" />-->
 
 
-       <!-- <item
-            android:id="@+id/on_going"
-            android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="@string/running_jobs" />
-        <item
-            android:id="@+id/job_history"
-            android:icon="@drawable/ic_history_black_24dp"
-            android:title="@string/job_history" />-->
-
+        <!-- <item
+             android:id="@+id/on_going"
+             android:icon="@drawable/ic_directions_run_black_24dp"
+             android:title="@string/running_jobs" />
+         <item
+             android:id="@+id/job_history"
+             android:icon="@drawable/ic_history_black_24dp"
+             android:title="@string/job_history" />-->
 
 
         <item
@@ -80,7 +83,6 @@
             android:id="@+id/action_logout"
             android:icon="@drawable/mic_logout"
             android:title="@string/logout" />
-
 
     </group>
 

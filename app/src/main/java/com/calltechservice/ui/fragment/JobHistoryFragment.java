@@ -1,10 +1,14 @@
 package com.calltechservice.ui.fragment;
 
 import android.content.Context;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +40,7 @@ public class JobHistoryFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onGoingJobResponses= new ArrayList<>();
+        onGoingJobResponses = new ArrayList<>();
 
     }
 
@@ -46,7 +50,7 @@ public class JobHistoryFragment extends BaseFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_on_going, container, false);
         View view = binding.getRoot();
 
-       // requireActivity().setTitle("Completed");
+        // requireActivity().setTitle("Completed");
         setRecyslerViw();
 
         callCompletejobListAPI();
@@ -63,24 +67,23 @@ public class JobHistoryFragment extends BaseFragment {
         return view;
     }
 
-    private void setRecyslerViw()
-    {
-        onGoingJobResponses=new ArrayList<>();
-        layoutManager=new LinearLayoutManager(requireActivity());
+    private void setRecyslerViw() {
+        onGoingJobResponses = new ArrayList<>();
+        layoutManager = new LinearLayoutManager(requireActivity());
         binding.rvOngoing.setLayoutManager(layoutManager);
-        onGoingAdapter =new CompleteJobAdapter(context,onGoingJobResponses);
+        onGoingAdapter = new CompleteJobAdapter(context, onGoingJobResponses);
         onGoingAdapter.setHasStableIds(true);
         binding.rvOngoing.setAdapter(onGoingAdapter);
         binding.rvOngoing.addOnItemTouchListener(new RecyclerItemClickListener(requireActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Fragment fragment=new OnGoingDetailsFragment();
-                        Bundle bundle=new Bundle();
+                        Fragment fragment = new OnGoingDetailsFragment();
+                        Bundle bundle = new Bundle();
                         bundle.putInt("type", 1);
                         bundle.putString("jobId", onGoingJobResponses.get(position).getJobDetails().getJobId());
                         bundle.putString("userId", onGoingJobResponses.get(position).getJobDetails().getUserId());
                         fragment.setArguments(bundle);
-                        CommonUtils.setFragment(fragment,false,  requireActivity(), R.id.flContainerHome);
+                        CommonUtils.setFragment(fragment, false, requireActivity(), R.id.flContainerHome);
 
 
                        /* Fragment fragment=new HistoryDetailsFragment();
@@ -103,16 +106,14 @@ public class JobHistoryFragment extends BaseFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context=context;
+        this.context = context;
     }
-
-
 
 
     private void callCompletejobListAPI() {
         onGoingJobResponses.clear();
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("provider_id",userPref.getUser().getUserId());
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("provider_id", userPref.getUser().getUserId());
 
         apiService.callCompletejobListAPI(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -120,29 +121,25 @@ public class JobHistoryFragment extends BaseFragment {
                 .doOnSubscribe(this::showProgressDialog)
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
-                    if (commonResponse.getStatus() == 1&&commonResponse.getData()!=null&&commonResponse.getData().size()>0) {
+                    if (commonResponse.getStatus() == 1 && commonResponse.getData() != null && commonResponse.getData().size() > 0) {
                         onGoingJobResponses.addAll(commonResponse.getData());
                         onGoingAdapter.notifyDataSetChanged();
-                    } else{
+                    } else {
                         //utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
-                    if(throwable instanceof ConnectException)
-                    {
-                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
-                    }
-                    else
-                    {
-                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
+                    if (throwable instanceof ConnectException) {
+                        utils.simpleAlert(requireActivity(), requireActivity().getString(R.string.error), requireActivity().getString(R.string.check_network_connection));
+                    } else {
+                        utils.simpleAlert(requireActivity(), requireActivity().getString(R.string.error), throwable.getMessage());
                     }
                 });
     }
 
 
-    private void callJobHistoryApi()
-    {
+    private void callJobHistoryApi() {
        /* showProgressDialog();
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("user_id", SharedPref.getPreferencesString(requireActivity(), AppConstant.USER_ID));

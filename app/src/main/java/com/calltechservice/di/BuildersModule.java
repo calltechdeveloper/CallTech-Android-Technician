@@ -15,6 +15,7 @@ import com.calltechservice.ui.fragment.AboutUsFragment;
 import com.calltechservice.ui.fragment.ComingSoonFragment;
 import com.calltechservice.ui.fragment.ComplainFragment;
 import com.calltechservice.ui.fragment.DashboardFragment;
+import com.calltechservice.ui.fragment.DocumentsFragment;
 import com.calltechservice.ui.fragment.ForgotPasswordFragment;
 import com.calltechservice.ui.fragment.HistoryDetailsFragment;
 import com.calltechservice.ui.fragment.InvatationDetailsFragment;
@@ -180,6 +181,9 @@ public abstract class BuildersModule {
 
     @ContributesAndroidInjector
     abstract Termsprivacy bindTermsprivacy();
+
+    @ContributesAndroidInjector
+    abstract DocumentsFragment bindDocumentsFragment();
 
 }
 
