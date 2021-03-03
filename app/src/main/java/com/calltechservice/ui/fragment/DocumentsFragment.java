@@ -5,50 +5,33 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
+import android.graphics.text.LineBreaker;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Layout;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.MimeTypeFilter;
-import androidx.fragment.app.Fragment;
-import androidx.loader.content.CursorLoader;
 
 import com.calltechservice.BaseFragment;
 import com.calltechservice.R;
-import com.facebook.common.file.FileUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ConnectException;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -58,11 +41,11 @@ public class DocumentsFragment extends BaseFragment {
     String cvType;
     String policeClearanceFile;
     String policeClearanceType;
-    String driversLicenceFile;
-    String driversLicenceType;
+    String idFile;
+    String idType;
     private static final int PICKFILE_REQUEST_CODE_CV = 1;
     private static final int PICKFILE_REQUEST_CODE_PC = 2;
-    private static final int PICKFILE_REQUEST_CODE_DL = 3;
+    private static final int PICKFILE_REQUEST_CODE_ID = 3;
     private Button submitButton;
 
     @Nullable
@@ -94,13 +77,13 @@ public class DocumentsFragment extends BaseFragment {
         Button policeClearanceButton = view.findViewById(R.id.policeClearanceButton);
         policeClearanceButton.setOnClickListener(v -> startActivityForResult(intent, PICKFILE_REQUEST_CODE_PC));
 
-        Button driversLicenceButton = view.findViewById(R.id.driversLicenceButton);
-        driversLicenceButton.setOnClickListener(v -> startActivityForResult(intent, PICKFILE_REQUEST_CODE_DL));
+        Button idDocumentButton = view.findViewById(R.id.idDocumentButton);
+        idDocumentButton.setOnClickListener(v -> startActivityForResult(intent, PICKFILE_REQUEST_CODE_ID));
 
         submitButton = view.findViewById(R.id.submitButton);
         submitButton.setOnClickListener(v -> {
             String userId = userPref.getUser().getUserId();
-            apiService.uploadIndividualDocs(userId, cvFile, cvType, policeClearanceFile, policeClearanceType, driversLicenceFile, driversLicenceType)
+            apiService.uploadIndividualDocs(userId, cvFile, cvType, policeClearanceFile, policeClearanceType, idFile, idType)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe(this::showProgressDialog)
@@ -126,7 +109,7 @@ public class DocumentsFragment extends BaseFragment {
                             snackBarView.getChildAt(0).setLayoutParams(params);*/
                             TextView textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                textView.setBreakStrategy(Layout.BREAK_STRATEGY_SIMPLE);
+                                textView.setBreakStrategy(LineBreaker.BREAK_STRATEGY_SIMPLE);
                             }
                             textView.setMaxLines(8);
                             hideProgressDialog();
@@ -162,9 +145,9 @@ public class DocumentsFragment extends BaseFragment {
                     policeClearanceFile = base64EncodeFileData(fileUri);
                     policeClearanceType = getMimeType(fileUri);
                     break;
-                case PICKFILE_REQUEST_CODE_DL:
-                    driversLicenceFile = base64EncodeFileData(fileUri);
-                    driversLicenceType = getMimeType(fileUri);
+                case PICKFILE_REQUEST_CODE_ID:
+                    idFile = base64EncodeFileData(fileUri);
+                    idType = getMimeType(fileUri);
                     break;
                 case PICKFILE_REQUEST_CODE_CV:
                 default:
@@ -179,7 +162,7 @@ public class DocumentsFragment extends BaseFragment {
     }
 
     private void checkButtonState() {
-        if (policeClearanceFile != null && driversLicenceFile != null && cvFile != null) {
+        if (policeClearanceFile != null && idFile != null && cvFile != null) {
             submitButton.setEnabled(true);
             submitButton.setBackgroundResource(R.color.colorPrimary);
         }

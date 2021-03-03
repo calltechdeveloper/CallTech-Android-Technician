@@ -36,11 +36,11 @@
         app:layout_constraintTop_toBottomOf="@+id/cvButton" />
 
     <Button
-        android:id="@+id/driversLicenceButton"
+        android:id="@+id/idDocumentButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
-        android:text="@string/select_drivers_licence"
+        android:text="@string/select_id_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/policeClearanceButton" />
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toTopOf="@+id/submitButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/driversLicenceButton"
+        app:layout_constraintTop_toBottomOf="@+id/idDocumentButton"
         tools:text="Sample text" />
 
     <Button

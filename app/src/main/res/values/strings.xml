@@ -246,6 +246,6 @@
     <string name="select_files_to_upload">Select files to upload. Files can be PNG, JPG or PDF</string>
     <string name="upload_cv">Select CV</string>
     <string name="select_police_clearance">Select police clearance</string>
-    <string name="select_drivers_licence">Select drivers licence</string>
+    <string name="select_id_number">Select ID document</string>
 
 </resources>

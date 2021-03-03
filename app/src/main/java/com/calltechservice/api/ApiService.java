@@ -213,8 +213,8 @@ public interface ApiService {
                                                                           @Field("cv_type") String cvType,
                                                                           @Field("police_clearance") String policeClearance,
                                                                           @Field("police_clearance_type") String policeClearanceType,
-                                                                   @Field("drivers_licence") String driversLicence,
-                                                                   @Field("drivers_licence_type") String driversLicenceType);
+                                                                   @Field("id_doc") String idDoc,
+                                                                   @Field("id_doc_type") String idDocType);
 
     @FormUrlEncoded
     @POST("upload_company_docs")
