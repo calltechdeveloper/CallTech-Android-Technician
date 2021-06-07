@@ -61,7 +61,7 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
     String deviceToken;
     private List<SelectCategoryResponse> serviceCtegoryModels;
     private LocationTracker locationTracker;
-    private int PLACE_PICKER_REQUEST = 1;
+    private final int PLACE_PICKER_REQUEST = 1;
     private LatLng searchedLocation;
     private LatLng selectedLatLang;
     private AskForLocationBinding bindingDialog;
@@ -69,7 +69,10 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
     private LatLng selectedJobLocationLatLong;
     LatLng currentLocation;
     private ArrayList<CountryModel> list;
-    private String country_id = "0", country_id1, country_code = "", country_name = "Select Country";
+    private String country_id = "0";
+    private String country_id1;
+    private final String country_code = "";
+    private String country_name = "Select Country";
 
     @SuppressLint("NewApi")
     @Override
@@ -96,18 +99,6 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
                 }
             } else {
                 utils.simpleAlert(this, "category", "please select the category");
-            }
-        });
-
-        binding.lytVisiblePass.setOnClickListener(v -> {
-            if (isVisible) {
-                binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                binding.ivVisiblePass.setImageDrawable(getDrawable(R.drawable.not_visible));
-                isVisible = false;
-            } else {
-                binding.edtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                binding.ivVisiblePass.setImageDrawable(getDrawable(R.drawable.not_visible_hover));
-                isVisible = true;
             }
         });
     }
@@ -215,13 +206,6 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
             binding.edtEmail.setError(null);
         }
 
-        if (binding.edtPassword.getText().toString().isEmpty()) {
-            binding.edtPassword.setError("Please enter password");
-            valid = false;
-        } else {
-            binding.edtPassword.setError(null);
-        }
-
         return valid;
     }
 
@@ -244,7 +228,6 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
             jsonObject.addProperty("last_name", binding.edtSurName.getText().toString());
             jsonObject.addProperty("email", binding.edtEmail.getText().toString());
             jsonObject.addProperty("mobile", mobile);
-            jsonObject.addProperty("password", binding.edtPassword.getText().toString());
             jsonObject.addProperty("device_id", deviceToken);
             jsonObject.addProperty("device_type", "A");
             jsonObject.addProperty("type", "1");
@@ -266,7 +249,8 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
                             utils.toaster(response.getMessage());
                             startActivity(new Intent(this, SelectSubCategoryActivity.class).putExtra("registration", true));
                             finishAffinity();
-                        } else utils.simpleAlert(this, getString(R.string.error), response.getMessage());
+                        } else
+                            utils.simpleAlert(this, getString(R.string.error), response.getMessage());
                     }, e -> {
                         hideProgressDialog();
                         if (e instanceof ConnectException) {
@@ -323,7 +307,6 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
         dialog.getWindow().setAttributes(layoutParams);
 
         bindingDialog.btCancel.setOnClickListener(view -> dialog.dismiss());
-
         bindingDialog.tvSelectLocation.setOnClickListener(view -> {
             if (isLocationEnabled()) {
                 showPlacePicker();
@@ -398,12 +381,12 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == PLACE_PICKER_REQUEST) && (resultCode == RESULT_OK)) {
-            Place place = (Place) PingPlacePicker.getPlace(data);
+            Place place = PingPlacePicker.getPlace(data);
             if (place != null) {
                 Toast.makeText(this, "You selected the place: " + place.getName(), Toast.LENGTH_SHORT).show();
                 if (place.getAddress() != null && !place.getAddress().equals("")) {
                     bindingDialog.tvSelectLocation.setText(place.getAddress());
-                    selectedJobLocationAddress = (String) place.getAddress();
+                    selectedJobLocationAddress = place.getAddress();
                     binding.etAddress.setText(place.getAddress());
                     selectedJobLocationLatLong = place.getLatLng();
                     searchedLocation = place.getLatLng();
@@ -432,15 +415,12 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
             List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
-
                 StringBuilder strReturnedAddress = new StringBuilder();
-
                 for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
                 strAdd = strReturnedAddress.toString();
                 binding.etAddress.setText(strAdd);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -457,42 +437,14 @@ public class RegistrationNewActivity extends BaseActivity implements View.OnClic
     }
 
     public void startLocation() {
+        locationTracker = new LocationTracker(this, location -> {
+            currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+            selectedLatLang = currentLocation;
+        });
         if (PermissionUtils.checkPermissionLocation(this)) {
-            locationTracker = new LocationTracker(this, location -> {
-                currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                selectedLatLang = currentLocation;
-            });
             locationTracker.updateLocation();
         } else {
             PermissionUtils.requestPermissionLocation(this);
         }
-
-
-        /*Dexter.withActivity(this)
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        locationTracker = new LocationTracker(RegistrationActivity.this, RegistrationActivity.this);
-                        locationTracker.updateLocation();
-
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            // open device settings when the permission is
-                            // denied permanently
-                            //openSettings();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(com.karumi.dexter.listener.PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-
-
-                }).check();*/
     }
 }

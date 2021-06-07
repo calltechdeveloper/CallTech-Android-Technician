@@ -1,12 +1,16 @@
 package com.calltechservice.ui.fragment;
 
 import android.content.Context;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +47,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProviderDetailsFragment extends BaseFragment /*implements OnMapReadyCallback*/ {
-/*implements OnMapReadyCallback*/
+    /*implements OnMapReadyCallback*/
     private ProviderDetailsBinding binding;
     private GoogleMap mMap;
     private ClusterManager<MyItem> mClusterManager;
@@ -75,16 +79,14 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
         binding = DataBindingUtil.inflate(inflater, R.layout.provider_details, container, false);
         requireActivity().setTitle("Service Provider Details");
         ((HomeActivity) requireActivity()).changeIcon(false);
-        employeeDatas=new ArrayList<>();
-       // details=getArguments().getParcelable("details");
+        employeeDatas = new ArrayList<>();
+        // details=getArguments().getParcelable("details");
         //subCatId=getArguments().getString("sub_cat");
 
         setData();
-        if(details!=null)
-        {
+        if (details != null) {
             setData();
-            if(details.getIsIndividual()!=null&&details.getIsIndividual().equalsIgnoreCase("0"))
-            {
+            if (details.getIsIndividual() != null && details.getIsIndividual().equalsIgnoreCase("0")) {
                 //callGetEmployeeApi();
             }
         }
@@ -95,35 +97,31 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
 
     private void callGetEmployeeApi() {
         showProgressDialog();
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("agency_id",details.getmEmpId());
-        jsonObject.addProperty("sub_cat_id",subCatId);
-        jsonObject.addProperty("rquest","getAgencyEmp");
-        Call<EmployeeResponse> registrationModelCall= APIExecutor.getApiService(requireActivity()).callAgencyEmployee(jsonObject);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("agency_id", details.getmEmpId());
+        jsonObject.addProperty("sub_cat_id", subCatId);
+        jsonObject.addProperty("rquest", "getAgencyEmp");
+        Call<EmployeeResponse> registrationModelCall = APIExecutor.getApiService().callAgencyEmployee(jsonObject);
         registrationModelCall.enqueue(new Callback<EmployeeResponse>() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
                 hideProgressDialog();
-                if(response!=null&&response.body()!=null&&response.body().getStatus()!=null) {
+                if (response != null && response.body() != null && response.body().getStatus() != null) {
                     if (response.body().getStatus().equalsIgnoreCase("1")) {
                         employeeDatas.addAll(response.body().getData());
                         employeListAdapter.notifyDataSetChanged();
+                    } else {
+                        CommonUtils.showSnack(binding.getRoot(), response.body().getMessage() != null ? response.body().getMessage() : requireActivity().getString(R.string.server_not_responding));
                     }
-                    else
-                    {
-                        CommonUtils.showSnack(binding.getRoot(),response.body().getMessage()!=null?response.body().getMessage():requireActivity().getString(R.string.server_not_responding));
-                    }
-                }
-                else
-                {
-                    CommonUtils.showSnack(binding.getRoot(),getString(R.string.server_not_responding));
+                } else {
+                    CommonUtils.showSnack(binding.getRoot(), getString(R.string.server_not_responding));
                 }
             }
 
             @Override
             public void onFailure(Call<EmployeeResponse> call, Throwable t) {
-                Log.e("onFailure",t+"");
+                Log.e("onFailure", t + "");
                 hideProgressDialog();
             }
         });
@@ -147,33 +145,9 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_user))
                     .apply(RequestOptions.errorOf(R.drawable.ic_user))
                     .into(binding.ivProfile);
-        }else {
+        } else {
             binding.ivProfile.setImageResource(R.drawable.ic_user);
         }
-
-       /* binding.rvEmployeeList.setNestedScrollingEnabled(false);
-        linearLayoutManager=new LinearLayoutManager(requireActivity());
-        binding.rvEmployeeList.setLayoutManager(linearLayoutManager);
-        employeListAdapter =new EmployeListAdapter(requireActivity(),employeeDatas);
-        binding.rvEmployeeList.setAdapter(employeListAdapter);
-        binding.tvUserName.setText(details.getmName()!=null?details.getmName():"");
-        binding.tvNoOfJobDone.setText(details.getmJobDone()!=null?details.getmJobDone():"");
-        if(details.getmRating()!=null&&!details.getmRating().equalsIgnoreCase(""))
-        {
-            binding.ratingBar.setRating(Float.valueOf(details.getmRating()));
-        }
-        else
-        {
-            binding.ratingBar.setRating(Float.valueOf(3.0f));
-        }
-        if(details.getmProfilePic()!=null&&!details.getmProfilePic().equalsIgnoreCase(""))
-        {
-            Glide.with(requireActivity()).load(details.getmProfilePic()).apply(new RequestOptions().placeholder(R.drawable.user)).into(binding.ivProfile);
-        }
-        else
-        {
-           binding.ivProfile.setImageResource(R.drawable.user);
-        }*/
     }
 
     private void loadMap() {
@@ -233,6 +207,5 @@ public class ProviderDetailsFragment extends BaseFragment /*implements OnMapRead
             super.onBeforeClusterItemRendered(item, markerOptions);
         }
     }
-
 
 }

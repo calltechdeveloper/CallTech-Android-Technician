@@ -188,7 +188,7 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
 
-                StringBuilder strReturnedAddress = new StringBuilder("");
+                StringBuilder strReturnedAddress = new StringBuilder();
 
                 for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
@@ -262,7 +262,7 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == PLACE_PICKER_REQUEST) && (resultCode == RESULT_OK)) {
-            com.google.android.libraries.places.api.model.Place place = (com.google.android.libraries.places.api.model.Place) PingPlacePicker.getPlace(data);
+            com.google.android.libraries.places.api.model.Place place = PingPlacePicker.getPlace(data);
             if (place != null) {
                 Toast.makeText(this, "You selected the place: " + place.getName(), Toast.LENGTH_SHORT).show();
                 AreaList areaList = new AreaList();
@@ -293,17 +293,15 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
 
 
     private void callAddLocationAPI() {
-
-        StringBuilder stringLat = new StringBuilder("");
-        StringBuilder stringLng = new StringBuilder("");
-        StringBuilder stringArea = new StringBuilder("");
+        StringBuilder stringLat = new StringBuilder();
+        StringBuilder stringLng = new StringBuilder();
+        StringBuilder stringArea = new StringBuilder();
         for (int i = 0; i < serviceAreaRequests.getAreaList().size(); i++) {
             if (!stringLat.toString().equalsIgnoreCase("")) {
                 stringLat.append("," + serviceAreaRequests.getAreaList().get(i).getLat());
             } else {
                 stringLat.append(serviceAreaRequests.getAreaList().get(i).getLat());
             }
-
 
             if (!stringLng.toString().equalsIgnoreCase("")) {
                 stringLng.append("," + serviceAreaRequests.getAreaList().get(i).getLng());
@@ -319,7 +317,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
 
         }
 
-
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("service_provider_id", userPref.getUser().getUserId());
         jsonObject.addProperty("service_id", subCategoryId);
@@ -334,15 +331,11 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
                     if (commonResponse.getStatus() == 1 && commonResponse.getData() != null) {
-
                        /* userPref.setLogin(true);
 
                         startActivity(new Intent(this, HomeActivity.class));
                         finish();*/
-
                         finish();
-
-
                     } else {
                         utils.simpleAlert(this, getString(R.string.error), commonResponse.getMessage());
                         hideProgressDialog();
@@ -357,83 +350,17 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                 });
     }
 
-
-    private void callAddServiceListApi() {
-        /*shoprogress();
-        serviceAreaRequests.setProviderId(SharedPref.getPreferencesString(mContext,AppConstant.USER_ID));
-        serviceAreaRequests.setRequest("addServiceArea");
-        final Call<CommonResponse> callAddServiceArea = APIExecutor.getApiService(mContext).callAddServiceAreaList(serviceAreaRequests);
-        callAddServiceArea.enqueue(new Callback<CommonResponse>() {
-            @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                if(response!=null)
-                {
-                    if(response.body().getmStatus()!=null&&response.body().getmStatus().equalsIgnoreCase("1"))
-                    {
-                        SharedPref.savePreferenceBoolean(mContext,AppConstant.SERVICE_AREA_ADDED,true);
-                        Intent intent=new Intent(SelectYourServiceAreaActivity.this,BankInfoActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else
-                    {
-                        CommonUtils.showSnack(binding.getRoot(),response.body().getmMessage()!=null?response.body().getmMessage():"");
-                    }
-                }
-
-                setDismis();
-            }
-
-            @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
-                setDismis();
-            }
-        });*/
-    }
-
     public void startLocation() {
         if (PermissionUtils.checkPermissionLocation(this)) {
-            locationTracker = new LocationTracker(this, new LocationResult() {
-                @Override
-                public void gotLocation(Location location) {
-                    currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    selectedLatLang = currentLocation;
-                }
+            locationTracker = new LocationTracker(this, location -> {
+                currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                selectedLatLang = currentLocation;
             });
             locationTracker.updateLocation();
 
         } else {
             PermissionUtils.requestPermissionLocation(this);
         }
-
-
-//
-//        Dexter.withActivity(this)
-//                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-//                .withListener(new PermissionListener() {
-//                    @Override
-//                    public void onPermissionGranted(PermissionGrantedResponse response) {
-//                        locationTracker = new LocationTracker(RegistrationActivity.this, RegistrationActivity.this);
-//                        locationTracker.onUpdateLocation();
-//
-//                    }
-//
-//                    @Override
-//                    public void onPermissionDenied(PermissionDeniedResponse response) {
-//                        if (response.isPermanentlyDenied()) {
-//                            // open device settings when the permission is
-//                            // denied permanently
-//                            openSettings();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onPermissionRationaleShouldBeShown(com.karumi.dexter.listener.PermissionRequest permission, PermissionToken token) {
-//                        token.continuePermissionRequest();
-//                    }
-//
-//
-//                }).check();
     }
 
 }

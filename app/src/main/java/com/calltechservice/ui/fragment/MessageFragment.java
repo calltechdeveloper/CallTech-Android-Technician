@@ -402,7 +402,7 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         jsonObject.addProperty("provider_id", providerId);
         jsonObject.addProperty("amount", ammount);
         jsonObject.addProperty("rquest", "award_job_to_emp");
-        Call<CommonResponse> commonResponseCall = APIExecutor.getApiService(requireActivity()).callAwardJob(jsonObject);
+        Call<CommonResponse> commonResponseCall = APIExecutor.getApiService().callAwardJob(jsonObject);
 
         commonResponseCall.enqueue(new Callback<CommonResponse>() {
             @Override

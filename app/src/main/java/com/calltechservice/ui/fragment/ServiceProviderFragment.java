@@ -501,7 +501,7 @@ public class ServiceProviderFragment extends BaseFragment implements View.OnClic
         jsonObject.addProperty("employee_type", binding.spProvider.getSelectedItemPosition());
         jsonObject.addProperty("sub_cat_id", subCatId);
         jsonObject.addProperty("rquest","getServiceProvider");
-        Call<EmployeeResponse> employeeResponseCall = APIExecutor.getApiService(requireActivity()).callEmployee(jsonObject);
+        Call<EmployeeResponse> employeeResponseCall = APIExecutor.getApiService().callEmployee(jsonObject);
         employeeResponseCall.enqueue(new Callback<EmployeeResponse>() {
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {

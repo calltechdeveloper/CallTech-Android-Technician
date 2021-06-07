@@ -108,7 +108,7 @@ public class ComplainFragment extends BaseFragment implements View.OnClickListen
         jsonObject.addProperty("comment_title", binding.etSubject.getText().toString().trim());
         jsonObject.addProperty("comment", binding.etComment.getText().toString().trim());
         jsonObject.addProperty("rquest","raiseComplaint");
-        Call<CommonResponse> commonResponseCall= APIExecutor.getApiService(requireActivity()).callRaiseComplaint(jsonObject);
+        Call<CommonResponse> commonResponseCall= APIExecutor.getApiService().callRaiseComplaint(jsonObject);
 
         commonResponseCall.enqueue(new Callback<CommonResponse>() {
             @Override
