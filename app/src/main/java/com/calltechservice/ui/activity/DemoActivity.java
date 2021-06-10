@@ -25,19 +25,20 @@ public class DemoActivity extends BaseActivity implements View.OnClickListener {
     private static final String[] IMAGES1 = {"Microsoft Specialized Services \n For All your Microsoft Tech Support", "On Site & Remote Support \nFor All your Tech Support", "Cyber Security \nSpecialized Scan & Clean", "AI ROBOT \n  Sales & Support"};
     private ArrayList<Integer> imagesArray = new ArrayList<>();
     private ArrayList<String> imagesArray2 = new ArrayList<>();
+    private int currentPage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_demo);
-        clickListener();
+        setupClickListeners();
         init();
     }
 
-    public void clickListener() {
+    public void setupClickListeners() {
         binding.btSkip.setOnClickListener(this);
         binding.btGetStarted.setOnClickListener(this);
-        binding.btLogin.setOnClickListener(this);
+        binding.btLogin.setOnClickListener((v -> binding.pager.setCurrentItem(++currentPage)));
     }
 
     private void init() {
@@ -52,7 +53,7 @@ public class DemoActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void onPageSelected(int position) {
-
+                currentPage = position;
             }
 
             @Override
@@ -80,7 +81,6 @@ public class DemoActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btSkip:
-            case R.id.btLogin:
             case R.id.btGetStarted:
             default:
                 Intent intent1 = new Intent(DemoActivity.this, NewUserActivity.class);

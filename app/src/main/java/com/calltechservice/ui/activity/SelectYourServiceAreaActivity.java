@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -28,7 +25,6 @@ import com.calltechservice.BaseActivity;
 import com.calltechservice.R;
 import com.calltechservice.databinding.ActivitySelectYourServiceAreaBinding;
 import com.calltechservice.databinding.AskForLocationBinding;
-import com.calltechservice.location.LocationResult;
 import com.calltechservice.location.LocationTracker;
 import com.calltechservice.location.MapDisplayUtils;
 import com.calltechservice.model.request.ServiceAreaRequest;
@@ -41,31 +37,23 @@ import com.google.gson.JsonObject;
 import com.rtchagas.pingplacepicker.PingPlacePicker;
 
 import java.net.ConnectException;
-import java.util.List;
-import java.util.Locale;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SelectYourServiceAreaActivity extends BaseActivity implements LocationResult, View.OnClickListener {
+public class SelectYourServiceAreaActivity extends BaseActivity {
 
     private static final int PLACE_PICKER_REQUEST = 1;
     private ActivitySelectYourServiceAreaBinding binding;
     private LocationTracker locationTracker;
-    private Location location;
     private AddServiceAreaAdapter addServiceAreaAdapter;
     private Context mContext;
     private AskForLocationBinding bindingDialog;
-    private List<String> serviceArea;
     private ServiceAreaRequest serviceAreaRequests;
 
     private AddRemoveCategoryModel model;
     private String subCategoryId;
-    String selectedjoblocationadd;
-    private LatLng selectedjoblocationlatlong;
     LatLng currentLocation;
-    private LatLng searchedLocation;
-    private LatLng selectedLatLang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,59 +78,28 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
     }
 
     private void setListener() {
-        binding.tvSelectLocation.setOnClickListener(this);
-        binding.btSubmit.setOnClickListener(this);
+        binding.tvSelectLocation.setOnClickListener((v -> askLocationForService()));
+        binding.btSubmit.setOnClickListener((v -> {
+            if (serviceAreaRequests.getAreaList().size() > 0) {
+                callAddLocationAPI();
+            } else {
+                utils.simpleAlert(this, "", "Please select your service Area");
+            }
+        }));
     }
 
     private void setRecycler() {
-       /* serviceAreaRequests=new ServiceAreaRequest();
-
-        for (int i = 0; i<model.getLocation().size(); i++){
-            AreaList areaList=new AreaList();
-            areaList.setAreaName(model.getLocation().get(i).getAreaName()+"");
-            areaList.setLat(model.getLocation().get(i).getLat()+"");
-            areaList.setLng(model.getLocation().get(i).getLng()+"");
-            serviceAreaRequests.getAreaList().add(areaList);
-
-        }*/
-
         binding.rvAddCategory.setLayoutManager(new LinearLayoutManager(mContext));
         addServiceAreaAdapter = new AddServiceAreaAdapter(mContext, serviceAreaRequests);
         binding.rvAddCategory.setAdapter(addServiceAreaAdapter);
-
     }
 
     private void setToolBar() {
-        locationTracker = new LocationTracker(mContext, SelectYourServiceAreaActivity.this);
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setTitleTextColor(Color.WHITE);
         binding.toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back));
         setTitle("Select Service Area");
         binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
-    }
-
-    @Override
-    public void gotLocation(Location location) {
-        if (location != null) {
-            this.location = location;
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvSelectLocation:
-                askLocationForService();
-                break;
-
-            case R.id.btSubmit:
-                if (serviceAreaRequests.getAreaList().size() > 0) {
-                    callAddLocationAPI();
-                } else {
-                    utils.simpleAlert(this, "", "Please select your service Area");
-                }
-                break;
-        }
     }
 
     private void askLocationForService() {
@@ -151,12 +108,15 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(bindingDialog.getRoot());
-        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
-        layoutParams.dimAmount = .7f;
-        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().setAttributes(layoutParams);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams layoutParams = window.getAttributes();
+            layoutParams.dimAmount = .7f;
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.setAttributes(layoutParams);
+        }
         bindingDialog.cbCurrentLocation.setVisibility(View.GONE);
 
         bindingDialog.btCancel.setOnClickListener(view -> dialog.dismiss());
@@ -180,42 +140,9 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
     }
 
 
-    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
-        String strAdd = "";
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            List<android.location.Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-
-                StringBuilder strReturnedAddress = new StringBuilder();
-
-                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                strAdd = strReturnedAddress.toString();
-                //   binding.etjoblocation.setText( strAdd );
-
-            } else {
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return strAdd;
-    }
-
-
     private boolean isLocationEnabled() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-    private boolean checkGPSEnabled() {
-        if (!isLocationEnabled())
-            showAlert();
-        return isLocationEnabled();
     }
 
     private void showAlert() {
@@ -224,8 +151,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                 .setMessage("Locations Settings is set to 'Off'.\nEnable Location to use this app")
                 .setPositiveButton("Location Settings", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
-
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         startActivity(intent);
                     }
@@ -239,7 +164,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                 });
         alertDialogBuilder.show();
     }
-
 
     private void showPlacePicker() {
         PingPlacePicker.IntentBuilder builder = new PingPlacePicker.IntentBuilder();
@@ -266,14 +190,11 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
             if (place != null) {
                 Toast.makeText(this, "You selected the place: " + place.getName(), Toast.LENGTH_SHORT).show();
                 AreaList areaList = new AreaList();
-
-
                 //String location = MapDisplayUtils.getAddressFromLatLng(this, place.getLatLng().latitude,place.getLatLng().longitude);
                 //Log.e("hi ", "<<if place>> " +location);
 
 
                 if (place.getAddress() != null && place.getAddress().length() > 0) {
-
                     areaList.setAreaName(place.getAddress() + "");
                 } else {
                     String location = MapDisplayUtils.getAddressFromLatLng(this, place.getLatLng().latitude, place.getLatLng().longitude);
@@ -286,7 +207,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                 serviceAreaRequests.getAreaList().add(areaList);
                 addServiceAreaAdapter.notifyDataSetChanged();
                 Log.e("Service area", "lat" + place.getLatLng().latitude + "longitude" + place.getLatLng().longitude);
-
             }
         }
     }
@@ -314,7 +234,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
             } else {
                 stringArea.append(serviceAreaRequests.getAreaList().get(i).getAreaName());
             }
-
         }
 
         JsonObject jsonObject = new JsonObject();
@@ -331,10 +250,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
                     if (commonResponse.getStatus() == 1 && commonResponse.getData() != null) {
-                       /* userPref.setLogin(true);
-
-                        startActivity(new Intent(this, HomeActivity.class));
-                        finish();*/
                         finish();
                     } else {
                         utils.simpleAlert(this, getString(R.string.error), commonResponse.getMessage());
@@ -354,7 +269,6 @@ public class SelectYourServiceAreaActivity extends BaseActivity implements Locat
         if (PermissionUtils.checkPermissionLocation(this)) {
             locationTracker = new LocationTracker(this, location -> {
                 currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                selectedLatLang = currentLocation;
             });
             locationTracker.updateLocation();
 

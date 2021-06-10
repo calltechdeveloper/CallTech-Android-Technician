@@ -2,34 +2,25 @@ package com.calltechservice.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.Geocoder;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.calltechservice.R;
-import com.google.android.gms.maps.model.LatLng;
+import androidx.appcompat.app.AlertDialog;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import com.calltechservice.R;
 
 import javax.inject.Singleton;
 
 @Singleton
 public class Utils {
-    public static String IS_NOTIFICATION="is_notification";
-    public static String job,userid;
+    public static String job, userid;
     private Context context;
-    static Geocoder geocoder;
 
     public static String serviceID;
 
@@ -41,10 +32,6 @@ public class Utils {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-    public void logger(String message) {
-        Log.e("Win-Millionaire-Log", message);
-    }
-
     public void simpleAlert(Context context, String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialogTheme);
         builder.setTitle("");
@@ -54,23 +41,24 @@ public class Utils {
         builder.show();
     }
 
+    public void simpleAlert(Context context, String title, String message, DialogInterface.OnDismissListener dismissListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialogTheme);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Close", null)
+                .setCancelable(true)
+                .setOnDismissListener(dismissListener)
+                .create()
+                .show();
+    }
+
     public void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public String savedDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(date);
-    }
-
-    public String showDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-        return sdf.format(date);
-    }
-
     @SuppressWarnings("deprecation")
-    public Spanned fromHtml(String html){
+    public Spanned fromHtml(String html) {
         Spanned result;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
@@ -89,43 +77,5 @@ public class Utils {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnected();
     }
-    public String getFormattedDate(String incomingDate) {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        String formatedDate="";
-        try {
-            date = fmt.parse(incomingDate);
-            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MMM-yyyy");
-            formatedDate=fmtOut.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return formatedDate;
-    }
-
-    public static String getAddressFromLatLng(Context context,LatLng latLng) {
-
-        geocoder = new Geocoder(context, Locale.getDefault());
-        String address = "";
-        if (latLng != null) {
-
-            try {
-                address = geocoder
-                        .getFromLocation(latLng.latitude, latLng.longitude, 1)
-                        .get(0).getAddressLine(0);
-            } catch (IOException e) {
-            }
-        }
-
-        return address;
-
-    }
-
-
-
-
-
-
-
 
 }

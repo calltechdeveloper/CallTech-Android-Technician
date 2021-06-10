@@ -1,19 +1,20 @@
 package com.calltechservice.ui.fragment;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.calltechservice.BaseFragment;
 import com.calltechservice.R;
@@ -31,28 +32,23 @@ import java.util.ArrayList;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-
-public class MyServicesFragment extends BaseFragment implements View.OnClickListener {
-    private Context mContext;
+public class MyServicesFragment extends BaseFragment {
     private FragmentMyServicesBinding binding;
     private FinalSubCategoryAdapter adapter;
     private ArrayList<AddRemoveCategoryModel> finalCategory;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         finalCategory = new ArrayList<>();
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_services, container, false);
-        //setupViewPager(binding.viewpager,binding.tabs);
 
         setHasOptionsMenu(true);
-
         ((HomeActivity) requireActivity()).changeIcon(true);
         return binding.getRoot();
     }
@@ -60,62 +56,33 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setRecyclerView();
     }
 
-
-
-
     private void setRecyclerView() {
-        adapter = new FinalSubCategoryAdapter(getContext(),finalCategory);
+        adapter = new FinalSubCategoryAdapter(getContext(), finalCategory);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerView.setLayoutManager(layoutManager);// set LayoutManager to RecyclerView
         binding.recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new FinalSubCategoryAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
+        adapter.setOnItemClickListener((position, view) -> {
+            switch (view.getId()) {
+                case R.id.ivLocation:
+                    finalCategory.get(position).setSelected(!finalCategory.get(position).isSelected());
+                    adapter.notifyDataSetChanged();
 
-
-                switch (view.getId()){
-
-                    case R.id.ivLocation:
-
-                        if(finalCategory.get(position).isSelected()) {
-                            finalCategory.get(position).setSelected(false);
-
-                        }
-                        else {
-                            finalCategory.get(position).setSelected(true);
-
-                        }
-
-                        adapter.notifyDataSetChanged();
-
-                        Intent intent = new Intent(getContext(), SelectYourServiceAreaActivity.class);
-                        intent.putExtra("subCategory",finalCategory.get(position));
-                        startActivity(intent);
-
-                        break;
-
-
-                    case R.id.delete:
-
-                        logoutAlert(finalCategory.get(position).getService_id());
-                        break;
-
-                    default:
-                        break;
-
-                }
-
-
-
+                    Intent intent = new Intent(getContext(), SelectYourServiceAreaActivity.class);
+                    intent.putExtra("subCategory", finalCategory.get(position));
+                    startActivity(intent);
+                    break;
+                case R.id.delete:
+                    logoutAlert(finalCategory.get(position).getService_id());
+                    break;
+                default:
+                    break;
             }
         });
     }
-
 
     @Override
     public void onResume() {
@@ -124,55 +91,28 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
         callMyServicesAPI();
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.addmore, menu);
-
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.action_add:
-                /*Fragment fragment = new MyJobFragment();
-                CommonUtils.setFragment(fragment,true, (FragmentActivity) mContext, R.id.flContainerHome);*/
-
-                Intent intent = new Intent(getContext(),SelectSubCategoryActivity.class);
-                intent.putExtra("registration",false);
-
-                intent.putParcelableArrayListExtra("myselectedlist",finalCategory);
-              startActivity(intent);
-               // utils.toaster("Hello");
-
-
-                return true;
+        if (item.getItemId() == R.id.action_add) {
+            Intent intent = new Intent(getContext(), SelectSubCategoryActivity.class);
+            intent.putExtra("registration", false);
+            intent.putParcelableArrayListExtra("myselectedlist", finalCategory);
+            startActivity(intent);
+            return true;
         }
         return onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = requireActivity();
-    }
-
-
-
     private void callMyServicesAPI() {
         finalCategory.clear();
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("service_provider_id",userPref.getUser().getUserId());
-
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("service_provider_id", userPref.getUser().getUserId());
         apiService.callMyServicesAPI(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -180,33 +120,29 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
 
-                    if (commonResponse.getStatus() == 1&&commonResponse.getData()!=null&&commonResponse.getData().size()>0) {
+                    if (commonResponse.getStatus() == 1 && commonResponse.getData() != null && commonResponse.getData().size() > 0) {
                         finalCategory.addAll(commonResponse.getData());
                         adapter.notifyDataSetChanged();
-                    } else{
-                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),commonResponse.getMessage());
+                    } else {
+                        utils.simpleAlert(requireActivity(), requireActivity().getString(R.string.error), commonResponse.getMessage());
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
-                    if(throwable instanceof ConnectException)
-                    {
-                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
-                    }
-                    else
-                    {
-                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
+                    if (throwable instanceof ConnectException) {
+                        utils.simpleAlert(requireActivity(), requireActivity().getString(R.string.error), requireActivity().getString(R.string.check_network_connection));
+                    } else {
+                        utils.simpleAlert(requireActivity(), requireActivity().getString(R.string.error), throwable.getMessage());
                     }
                 });
     }
 
-
-
+    @SuppressLint("NotifyDataSetChanged")
     private void callMyServicesdeleteAPI(String serviceid) {
         finalCategory.clear();
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("service_provider_id",userPref.getUser().getUserId());
-        jsonObject.addProperty("service_id",serviceid);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("service_provider_id", userPref.getUser().getUserId());
+        jsonObject.addProperty("service_id", serviceid);
 
         apiService.callMyServicesdeleteAPI(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -214,28 +150,23 @@ public class MyServicesFragment extends BaseFragment implements View.OnClickList
                 .doOnSubscribe(this::showProgressDialog)
                 .doOnCompleted(this::hideProgressDialog)
                 .subscribe(commonResponse -> {
-
-                    if (commonResponse.getStatus() == 1&&commonResponse.getData()!=null&&commonResponse.getData().size()>0) {
+                    if (commonResponse.getStatus() == 1 && commonResponse.getData() != null && commonResponse.getData().size() > 0) {
                         finalCategory.addAll(commonResponse.getData());
                         adapter.notifyDataSetChanged();
-                    } else{
-                        utils.simpleAlert(requireActivity(),"",commonResponse.getMessage());
+                    } else {
+                        utils.simpleAlert(requireActivity(), "", commonResponse.getMessage());
                         adapter.notifyDataSetChanged();
                         hideProgressDialog();
                     }
                 }, throwable -> {
                     hideProgressDialog();
-                    if(throwable instanceof ConnectException)
-                    {
-                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),requireActivity().getString(R.string.check_network_connection));
-                    }
-                    else
-                    {
-                        utils.simpleAlert(requireActivity(),requireActivity().getString(R.string.error),throwable.getMessage());
+                    if (throwable instanceof ConnectException) {
+                        utils.simpleAlert(requireActivity(), requireActivity().getString(R.string.error), requireActivity().getString(R.string.check_network_connection));
+                    } else {
+                        utils.simpleAlert(requireActivity(), requireActivity().getString(R.string.error), throwable.getMessage());
                     }
                 });
     }
-
 
     private void logoutAlert(String serviceid) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.AlertDialogTheme);
